@@ -1,0 +1,22 @@
+LOG:  database system was shut down at 2016-03-18 11:37:26 IST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  role "rails-devise" does not exist
+FATAL:  role "rails-devise" does not exist
+FATAL:  database "apoorvgoyal" does not exist
+FATAL:  role "root" does not exist
+FATAL:  role "rails-devise_development" does not exist
+FATAL:  role "rails-devise_development" does not exist
+FATAL:  role "rails-devise" does not exist
+FATAL:  role "myuser" does not exist
+FATAL:  role "root" does not exist
+ERROR:  syntax error at or near "-" at character 22
+STATEMENT:  create database rails-devise_development;
+FATAL:  role "root" does not exist
+ERROR:  syntax error at or near "psql" at character 1
+STATEMENT:  psql rails_devise_development;
+ERROR:  syntax error at or near "use" at character 1
+STATEMENT:  use rails_devise_development;
+ERROR:  syntax error at or near "rails_devise_development" at character 1
+STATEMENT:  rails_devise_development;

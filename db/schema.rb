@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160317092351) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -25,12 +28,12 @@ ActiveRecord::Schema.define(version: 20160317092351) do
     t.float    "mrp"
     t.float    "weight"
     t.integer  "rank",             limit: 2
-    t.integer  "status",           limit: 1,   default: 0
+    t.integer  "status",           limit: 2,   default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
   end
 
-  add_index "products", ["status"], name: "index_products_on_status"
+  add_index "products", ["status"], name: "index_products_on_status", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
