@@ -38,12 +38,16 @@ ActiveRecord::Schema.define(version: 20160318085448) do
   create_table "images", force: :cascade do |t|
     t.integer  "imageable_id"
     t.string   "imageable_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.string   "alt_tag"
     t.text     "details"
-    t.integer  "priority",       limit: 2
-    t.integer  "sub_type",       limit: 2
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "priority",           limit: 2
+    t.integer  "sub_type",           limit: 2
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree

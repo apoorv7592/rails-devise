@@ -1,5 +1,49 @@
-<h1>New Category</h1>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> New Category </h4>
+		<%= form_for @category, url: categories_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label :name, class: 'col-sm-2' %>
+				<%= f.text_field :name, class: 'col-sm-6'%>
+			</div>
 
-<%= link_to 'Back', categories_path %>
+			<div class="row form-group">
+				<%= f.label :description, class: 'col-sm-2' %>
+				<%= f.text_field :description, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :status, class: 'col-sm-2' %>
+				<%= f.text_field :status, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :url_string, class: 'col-sm-2' %>
+				<%= f.text_field :url_string, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :seo_title, class: 'col-sm-2' %>
+				<%= f.text_field :seo_title, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :seo_meta, class: 'col-sm-2' %>
+				<%= f.text_field :seo_meta, class: 'col-sm-6'%>
+			</div>
+
+						
+
+			<div class="row form-group">
+				<%= f.label 'Category Photo', class: 'col-sm-2'%>
+				<%= f.file_field :image, class: 'col-sm-6' %>
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>
