@@ -7,7 +7,7 @@ class Image < ActiveRecord::Base
 		    medium: '340x340>',
 		    large:  '500x500>'
 	    },
-	    path: 'categories/:id/:style/:filename'
+	    path: 'categories/:id/:style/:filename',
 	    :convert_options => {
 	      :medium => "-quality 80 -interlace Plane",
 	      :thumb => "-quality 80 -interlace Plane",
