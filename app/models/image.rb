@@ -7,14 +7,16 @@ class Image < ActiveRecord::Base
 		    medium: '340x340>',
 		    large:  '500x500>'
 	    },
-	    path: 'categories/:id/:style/:filename',
 	    :convert_options => {
 	      :medium => "-quality 80 -interlace Plane",
 	      :thumb => "-quality 80 -interlace Plane",
 	      :square => "-quality 80 -interlace Plane",
 	      :large => "-quality 80 -interlace Plane"
-	      }
-	    }
+	    }, 
+	    storage: :s3,
+                  s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
+                  bucket: ENV["AWS_BUCKET"]
+        }
 
 
 	  validates_attachment :image,
