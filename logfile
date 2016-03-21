@@ -20,3 +20,4 @@ ERROR:  syntax error at or near "use" at character 1
 STATEMENT:  use rails_devise_development;
 ERROR:  syntax error at or near "rails_devise_development" at character 1
 STATEMENT:  rails_devise_development;
+LOG:  using stale statistics instead of current ones because stats collector is not responding
