@@ -32,7 +32,7 @@
               <td><%= category.url_string %></td>
               <td><%= category.seo_title %></td>
               <td><%= category.seo_meta %></td>
-              <td><%= image_tag category.image.url(:small), height: 100 %></td>
+              <td><%= image_tag category.image(:small), height: 100 %></td>
               <td><%= link_to 'Show', category %></td>
               <td><%= link_to 'Edit', edit_category_path(category) %></td>
               <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
