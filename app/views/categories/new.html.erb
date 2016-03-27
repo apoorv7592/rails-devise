@@ -15,9 +15,12 @@
 			</div>
 			<div class="row form-group">
 				<%= f.label :status, class: 'col-sm-2' %>
-				<%= f.text_field :status, class: 'col-sm-6'%>
-				
+                <%= f.radio_button :status, 'disabled'  %> Disabled
+                <%= f.radio_button :status, 'enabled', :checked => true  %> Enabled    
+                <%= f.radio_button :status, 'discontinued' %> Discontinued        
 			</div>
+
+
 			<div class="row form-group">
 				<%= f.label :url_string, class: 'col-sm-2' %>
 				<%= f.text_field :url_string, class: 'col-sm-6'%>

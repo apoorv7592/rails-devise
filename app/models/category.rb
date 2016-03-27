@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
 
   enum status: [:disabled, :enabled, :discontinued]
 
-  after_create :image_upload #if: lambda { |fanbook| fanbook.upload.present? }
+  after_create :image_upload 
   
   
   def image_upload

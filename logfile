@@ -35,3 +35,9 @@ STATEMENT:  exit
 	quit;
 ERROR:  syntax error at or near "exit" at character 1
 STATEMENT:  exit;
+LOG:  using stale statistics instead of current ones because stats collector is not responding
+LOG:  using stale statistics instead of current ones because stats collector is not responding
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
