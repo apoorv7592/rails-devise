@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-
   # GET /categories
   # GET /categories.json
   def index
@@ -25,9 +24,9 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-    @category.image = params[:category][:image]
     respond_to do |format|
       if @category.save
+        params[:category][:image].each { |image| @category.images.create(image: image) }
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
@@ -66,6 +65,7 @@ class CategoriesController < ApplicationController
     def set_category
       @category = Category.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params

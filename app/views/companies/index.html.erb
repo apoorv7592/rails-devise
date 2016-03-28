@@ -1,31 +1,58 @@
+<style>
+table, td, th {
+    border: 1px solid black;
+    text-align:center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+  background: #66cccc;
+  color:white;
+}
+
+td{
+  background: rgba(1,0,0,0.1);
+}
+</style>
+
 <p id="notice"><%= notice %></p>
+<div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+  <h1 style="text-align:center;"> Listing Companies</h1>
+  </br>
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to 'New Company', new_company_path, class: 'pull-right', class: 'btn btn-primary'%>
+    </div>
+  </div>
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th colspan="3" >Action</th>
+          </tr>
+        </thead>
 
-<h1>Listing Companies</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Contact</th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= company.name %></td>
-        <td><%= company.contact %></td>
-        <td><%= company.address %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Company', new_company_path %>
+        <tbody>
+          <% @companies.each do |company| %>
+            <tr>
+              <td><%= company.name %></td>
+              <td><%= company.contact %></td>
+              <td><%= company.address %></td>
+              <td><%= link_to 'Show', company %></td>
+              <td><%= link_to 'Edit', edit_company_path(company) %></td>
+              <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

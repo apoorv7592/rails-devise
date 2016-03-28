@@ -4,4 +4,5 @@ class Product < ActiveRecord::Base
     has_many :images, as: :imageable
 
     enum status: [:disabled, :enabled, :discontinued]
+
 end

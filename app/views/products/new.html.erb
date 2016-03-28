@@ -1,5 +1,78 @@
-<h1>New Product</h1>
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> New Product </h4>
+		<%= form_for @product, url: products_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label :name, class: 'col-sm-2' %>
+				<%= f.text_field :name, class: 'col-sm-6'%>
+			</div>
 
-<%= render 'form' %>
+			<div class="row form-group">
+				<%= f.label :description, class: 'col-sm-2' %>
+				<%= f.text_field :description, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :status, class: 'col-sm-2' %>
+                <%= f.radio_button :status, 'disabled'  %> Disabled
+                <%= f.radio_button :status, 'enabled', :checked => true  %> Enabled    
+                <%= f.radio_button :status, 'discontinued' %> Discontinued        
+			</div>
 
-<%= link_to 'Back', products_path %>
+
+			<div class="row form-group">
+				<%= f.label :url, class: 'col-sm-2' %>
+				<%= f.text_field :url, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :meta_title, class: 'col-sm-2' %>
+				<%= f.text_field :meta_title, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :meta_description, class: 'col-sm-2' %>
+				<%= f.text_field :meta_description, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :meta_keywords, class: 'col-sm-2' %>
+				<%= f.text_field :meta_keywords, class: 'col-sm-6'%>
+			</div>	
+
+			<div class="row form-group">
+				<%= f.label 'Company', class: 'col-sm-2' %>
+				<%= f.select :company_id,Company.all.collect{|d| [d.name,d.id]}, class: 'col-md-6'%>	
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :price, class: 'col-sm-2' %>
+				<%= f.text_field :price, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :mrp, class: 'col-sm-2' %>
+				<%= f.text_field :mrp, class: 'col-sm-6'%>
+			</div>	
+
+			<div class="row form-group">
+				<%= f.label :weight, class: 'col-sm-2' %>
+				<%= f.text_field :weight, class: 'col-sm-6'%>
+			</div>	
+
+			<div class="row form-group">
+				<%= f.label :rank, class: 'col-sm-2' %>
+				<%= f.text_field :rank, class: 'col-sm-6'%>
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.label 'Category Photo', class: 'col-sm-2'%>
+				<%= f.file_field :image, :multiple => true, class: 'col-sm-6' %>
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>
