@@ -1,0 +1,17 @@
+<%= simple_form_for(@product_size) do |f| %>
+  <%= f.error_notification %>
+
+
+  <div class="form-inputs">
+    <%= f.input :product_id %>
+    <%= f.input :size %>
+    <%= f.input :size_unit %>
+    <%= f.input :qty_avail %>
+    <%= f.input :status %>
+  </div>
+
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

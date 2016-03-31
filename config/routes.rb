@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :companies
   resources :products
+  resources :product_sizes
   resources :users
   get '/auth/:provider/callback' => 'sessions#create'
   get '/signin' => 'sessions#new', :as => :signin

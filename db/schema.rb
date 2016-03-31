@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318085448) do
+ActiveRecord::Schema.define(version: 20160330094950) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "status"
+    t.integer  "parent_id"
     t.string   "url_string"
     t.string   "seo_title"
     t.string   "seo_meta"
@@ -59,6 +60,16 @@ ActiveRecord::Schema.define(version: 20160318085448) do
   add_index "product_categories", ["category_id"], name: "index_product_categories_on_category_id"
   add_index "product_categories", ["product_id", "category_id"], name: "index_product_categories_on_product_id_and_category_id", unique: true
   add_index "product_categories", ["product_id"], name: "index_product_categories_on_product_id"
+
+  create_table "product_sizes", force: :cascade do |t|
+    t.integer  "product_id",                       null: false
+    t.string   "size",                             null: false
+    t.integer  "qty_avail",            default: 0
+    t.integer  "size_unit",  limit: 1, default: 0
+    t.integer  "status",     limit: 1, default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "products", force: :cascade do |t|
     t.string   "name"

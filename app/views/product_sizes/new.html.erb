@@ -1,0 +1,42 @@
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> New Product Size </h4>
+		<%= form_for @product_size, url: product_sizes_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label :product_id, class: 'col-sm-2' %>
+				<%= f.text_field :product_id, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :size, class: 'col-sm-2' %>
+				<%= f.text_field :size, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :size_unit, class: 'col-sm-2' %>
+                <%= f.radio_button :size_unit, 'ml'  %> ml
+                <%= f.radio_button :size_unit, 'gm', :checked => true  %> gm    
+                <%= f.radio_button :size_unit, 'kg' %> kg 
+                <%= f.radio_button :size_unit, 'litre'  %> litre    
+                <%= f.radio_button :size_unit, 'piece' %> piece                
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :qty_avail, class: 'col-sm-2' %>
+				<%= f.text_field :qty_avail, class: 'col-sm-6'%>
+			</div>
+
+				
+			<div class="row form-group">
+				<%= f.label :status, class: 'col-sm-2' %>
+                <%= f.radio_button :status, 'disabled'  %> Disabled
+                <%= f.radio_button :status, 'enabled', :checked => true  %> Enabled    
+                <%= f.radio_button :status, 'discontinued' %> Discontinued        
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>
