@@ -1,4 +1,12 @@
 json.extract! @product, :id, :created_at, :updated_at, :name, :description, :url, :meta_title,:meta_description,:meta_keywords,:company_id,:price,:mrp,:weight,:rank,:status
+json.images do |json|
+  json.array! @product.images do |product_image|
+	  json.square "https://s3.amazonaws.com/appy-production/products/#{product_image.id}/square/#{product_image.image_file_name}" if @product.images.present?
+
+	  json.thumb "https://s3.amazonaws.com/appy-production/products/#{product_image.id}/thumb/#{product_image.image_file_name}" if @product.images.present?
+  end
+end
+
     json.sizes do |json|
       json.array! @product.product_sizes do |product_size|
         if product_size.status=="enabled"

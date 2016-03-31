@@ -13,12 +13,11 @@ class Image < ActiveRecord::Base
 	      :square => "-quality 80 -interlace Plane",
 	      :large => "-quality 80 -interlace Plane"
 	    },
-        :path =>  "products/:id/:style/:filename",
+        :path =>  "/products/:id/:style/:filename",
 	    storage: :s3,
                   s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
                   bucket: ENV["AWS_BUCKET"]
         }
-
 
 	  validates_attachment :image,
 	    :presence => true, 
