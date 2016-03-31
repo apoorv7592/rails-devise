@@ -10,6 +10,8 @@ class Product < ActiveRecord::Base
     after_create :image_upload  
   
 	def image_upload
-	  image.each { |pic| self.images.create(image: pic) }
+	  image.each  do |pic| 
+	  	Image.create(imageable_id: self.id, imageable_type: "Product", image: pic)
+	  end
 	end
 end
