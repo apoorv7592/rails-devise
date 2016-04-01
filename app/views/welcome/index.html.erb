@@ -24,8 +24,9 @@ td{
 <br/>
  <h3 style="text-align:center;">Guidelines</h3>
  <h6 style="text-align:center;"> Add Company names first </h6>
- <h6 style="text-align:center;"> Create Categories with uploading one image each </h6>
- <h6 style="text-align:center;"> Create Products </h6>
+ <h6 style="text-align:center;"> Create Categories </h6>
+ <h6 style="text-align:center;"> Create Products with images </h6>
+ <h6 style="text-align:center;"> Add different variants of a product in Product Size Panel </h6>
 <br/>
 <br/>
  <h3 style="text-align:center;">Quicklinks</h3>
@@ -34,6 +35,7 @@ td{
         <thead>
           <tr>
             <th>Products </th>
+            <th>Product Sizes</th>
             <th>Companies </th>
             <th>Categories </th>
             <th>Users </th>
@@ -43,6 +45,7 @@ td{
         <tbody>
             <tr>
               <td><%= link_to "Products" , products_path %></td>
+              <td><%= link_to "Product_Sizes" , product_sizes_path %></td>
               <td><%= link_to "Companies" , companies_path %></td>
               <td><%= link_to "Categories" , categories_path %></td>
               <td><%= link_to "Users" , users_path %></td>

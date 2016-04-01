@@ -47,7 +47,7 @@ td{
 
               <td><%= product_size.id %></td>
               <td><%= product_size.product.name %></td>
-              <td><%= product_size.size + product_size.size_unit %></td>
+              <td><%= product_size.size.to_s + product_size.size_unit.to_s %></td>
               <td><%= product_size.status %></td>
               <td><%= link_to 'Show', product_size %></td>
               <td><%= link_to 'Edit', edit_product_size_path(product_size) %></td>
