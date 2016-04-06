@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id               :integer          not null, primary key
+#  name             :string
+#  description      :text
+#  url              :string(100)
+#  meta_title       :string
+#  meta_description :text
+#  meta_keywords    :text
+#  company_id       :integer
+#  rank             :integer
+#  status           :integer          default(0)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -26,9 +44,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     images = params[:product][:image]
+    @product.sizes = params[:sizes]
+    @product.product_categories = params[:product_categories]
     respond_to do |format|
       if @product.save
-        
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -70,6 +89,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :url, :meta_title,:meta_description,:meta_keywords,:company_id,:price,:mrp,:weight,:rank,:status, image: [])
+      params.require(:product).permit(:name, :description, :url, :meta_title,:meta_description,:meta_keywords,:company_id,:price,:mrp,:weight,:rank,:status, image: [], sizes: [], product_categories: [])
     end
 end

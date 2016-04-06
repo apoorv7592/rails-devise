@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :string
+#  status      :integer
+#  parent_id   :integer
+#  url_string  :string
+#  seo_title   :string
+#  seo_meta    :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   # GET /categories
@@ -58,6 +74,10 @@ class CategoriesController < ApplicationController
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    @category=Category.import(params[:file])
   end
 
   private

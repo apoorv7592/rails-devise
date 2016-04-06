@@ -26,8 +26,11 @@ gem "paperclip"
 gem 'aws-sdk', '< 2.0'# Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'annotate'
 
+gem 'roo', '~> 2.1.0' #for csv
 
+gem 'chosen-rails' #jquery select boxes
 # Use Unicorn as the app server
 # gem 'unicorn'
 

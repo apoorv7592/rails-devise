@@ -1,6 +1,151 @@
-<h1>Editing Product</h1>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+ <script>
+	  var count =1;
+	  $(document).ready(function(){
+	  $("#add").click(function () {
+	  $("#productsizetable").clone().addClass("item" + count).appendTo("#productsize"); 
+	  count ++;
+	  console.log(count);
+	});
+	});
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+	  $(document).ready(function(){
+	  $("#remove").click(function () {
+	  $('#productsize').find('div:last').remove(); 
+	});
+	});
+</script>
+
+<script>
+ $(function(){
+ $(".chosen-select").chosen({width: "300px"});
+ });
+ </script>
+
+<script>
+ $(function(){
+ $(".chosen-select-size").chosen({width: "100px"});
+ });
+ </script>
+<style type="text/css">
+	.int_box
+	{
+		width :80px;
+		margin-right: 20px;
+	}
+</style>
+
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> Edit Product </h4>
+		<%= form_for @product, url: product_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label :name, class: 'col-sm-2' %>
+				<%= f.text_field :name, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :description, class: 'col-sm-2' %>
+				<%= f.text_field :description, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :status, class: 'col-sm-2' %>
+                <%= f.radio_button :status, 'disabled'  %> Disabled
+                <%= f.radio_button :status, 'enabled', :checked => true  %> Enabled    
+                <%= f.radio_button :status, 'discontinued' %> Discontinued        
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.label 'Company', class: 'col-sm-2' %>
+				<%= select_tag :company_id, options_from_collection_for_select(Company.all, "id", "name"), :class => 'chosen-select' %>
+			</div>
+
+			<div class="row form-group">
+			   <%= f.label 'Categories', class: 'col-sm-2' %>
+			   <%= select_tag :product_categories, options_from_collection_for_select(Category.where("parent_id > ?", 0), "id", "name"), :multiple => true, :class => 'chosen-select' %>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label 'Product Photo', class: 'col-sm-2'%>
+				<%= f.file_field :image, :multiple => true %>
+			</div>
+
+			<div style="border:2px solid black;width:730px;padding:20px;padding-left:0px;margin-bottom:20px;">
+			<h4> Product Sizes</h4>
+			<div id="productsizetable">
+				<table>
+				  <tr>
+				    <th>Size</th>
+				    <th>Size Unit</th> 
+				    <th>Qty Available</th>
+				    <th>MRP</th>
+				    <th>Price</th> 
+				    <th>Weight</th>				    
+				    <th>Status</th>
+				  </tr>
+				  <tr>
+				    <td><input type="number" name="sizes[][size]" min=0 class="int_box"></td>
+				    <td>
+				      <select name = "sizes[][size_unit]" class="chosen-select-size">
+					    <option value="ml">ml</option>
+					    <option value="gm">gm</option>
+					    <option value="kg">kg</option>
+					    <option value="litre">litre</option>
+					    <option value="piece">piece</option>
+					  </select>
+					</td>
+				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box"></td>
+				    <td><input type="number" name="sizes[][mrp]" min=0 class="int_box"></td>
+				    <td><input type="number" name="sizes[][price]" min=0 class="int_box"></td>
+				    <td><input type="number" name="sizes[][weight]" min=0 class="int_box"></td>
+				    <td>				      				      
+				      <select name = "sizes[][status]" class="chosen-select-size">
+					    <option value="enabled">enabled</option>
+					    <option value="disabled">disabled</option>
+					    <option value="discontinued">discontinued</option>
+					  </select>
+                    </td>
+				  </tr>
+				</table>
+            </div>
+            <div id='productsize'></div>
+
+
+		    <input type="button" value="Add More Size" id="add">
+			<input type="button" value="Remove Last Size" id="remove">
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :url, class: 'col-sm-2' %>
+				<%= f.text_field :url, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :meta_title, class: 'col-sm-2' %>
+				<%= f.text_field :meta_title, class: 'col-sm-6'%>
+				
+			</div>
+			<div class="row form-group">
+				<%= f.label :meta_description, class: 'col-sm-2' %>
+				<%= f.text_field :meta_description, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :meta_keywords, class: 'col-sm-2' %>
+				<%= f.text_field :meta_keywords, class: 'col-sm-6'%>
+			</div>	
+
+
+			<div class="row form-group">
+				<%= f.label :rank, class: 'col-sm-2' %>
+				<%= f.text_field :rank, class: 'col-sm-6'%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>

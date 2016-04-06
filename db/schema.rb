@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330094950) do
+ActiveRecord::Schema.define(version: 20160405065644) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -31,6 +31,27 @@ ActiveRecord::Schema.define(version: 20160330094950) do
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "code"
+    t.text     "valid_product"
+    t.text     "valid_category"
+    t.text     "valid_company"
+    t.text     "valid_city"
+    t.integer  "value"
+    t.integer  "value_type"
+    t.integer  "qualifying_amount"
+    t.integer  "max_discount"
+    t.integer  "max_usage"
+    t.integer  "max_usage_per_user"
+    t.datetime "expire_date"
+    t.datetime "start_date"
+    t.string   "success_message"
+    t.string   "coupon_message"
+    t.integer  "status"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -69,6 +90,9 @@ ActiveRecord::Schema.define(version: 20160330094950) do
     t.integer  "status",     limit: 1, default: 0
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "weight"
+    t.integer  "mrp"
+    t.integer  "price"
   end
 
   create_table "products", force: :cascade do |t|
@@ -79,9 +103,6 @@ ActiveRecord::Schema.define(version: 20160330094950) do
     t.text     "meta_description"
     t.text     "meta_keywords"
     t.integer  "company_id"
-    t.float    "price"
-    t.float    "mrp"
-    t.float    "weight"
     t.integer  "rank",             limit: 2
     t.integer  "status",           limit: 1,   default: 0
     t.datetime "created_at",                               null: false
