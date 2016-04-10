@@ -56,6 +56,11 @@ td{
         </tbody>
       </table>
     </div>
+
+    <%= form_tag import_categories_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+    <% end %>
   </div>
 </div>
 

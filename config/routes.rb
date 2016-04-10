@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :coupons
   root 'welcome#index'
-  post 'categories/import' => 'categories#import'
-  resources :categories
+  resources :categories do
+    collection { post :import }
+  end
+
   resources :companies
   resources :products
   resources :product_sizes
