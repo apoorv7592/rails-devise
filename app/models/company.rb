@@ -12,4 +12,10 @@
 
 class Company < ActiveRecord::Base
 	has_many :products
+
+	validates_presence_of :name, :message => "can't be empty"
+	validates :contact, :presence => {:message => 'invalid mobile number'},
+                     :numericality => true,
+                     :length => { :minimum => 10, :maximum => 12 }
+
 end

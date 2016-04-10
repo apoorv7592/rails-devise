@@ -24,7 +24,7 @@ class Product < ActiveRecord::Base
     has_many :product_sizes
 
     enum status: [:disabled, :enabled, :discontinued]
-
+    validates_presence_of :name, :company_id,   :message => "can't be empty"
     attr_accessor :image, :sizes, :product_categories
     after_save :image_upload, :product_sizes_add, :product_categories_add
 

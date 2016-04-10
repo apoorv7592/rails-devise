@@ -52,6 +52,7 @@ class CouponsController < ApplicationController
   # POST /coupons
   # POST /coupons.json
   def create
+    binding.pry
     params[:coupon][:code] = (params[:coupon][:code]).downcase
     params[:coupon][:valid_category] = (params[:valid_category]||{}).to_json
     params[:coupon][:valid_product] = (params[:valid_product]||{}).to_json

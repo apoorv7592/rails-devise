@@ -28,6 +28,7 @@ class Coupon < ActiveRecord::Base
 	enum status: [:disabled, :enabled, :discontinued]
     enum value_type: [:percentage, :flat]
     validates_uniqueness_of :code, :length => { :minimum => 2, :maximum => 15 }
+    validates_presence_of :code, :value, :qualifying_amount, :max_discount, :expire_date, :start_date, :message => "can't be empty"
     #product_id present in valid_product
     #category_id presence
     #company_presence
