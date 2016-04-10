@@ -51,6 +51,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    @product.company_id = params[:company_id]
     @product = Product.new(product_params)
     images = params[:product][:image]
     @product.sizes = params[:sizes]

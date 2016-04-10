@@ -152,3 +152,10 @@
 		<% end %>
 	</div>
 </div>
+
+<div class="col-sm-offset-2">
+<%= @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+<% end %>
+</div>
+
