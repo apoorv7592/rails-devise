@@ -19,7 +19,7 @@ class ProductSize < ActiveRecord::Base
 	belongs_to :product
 
 	enum status: [:disabled, :enabled, :discontinued]
-	enum size_unit: [:ml, :gm, :kg, :litre, :piece]
+	enum size_unit: [:ml, :gm, :kg, :litre, :piece, :cartridge, :strip, :pad, :capsule, :pallet, :sachet, :cm, :metre]
 
 	validates_presence_of :size, :product_id, :qty_avail
 end

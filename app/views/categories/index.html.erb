@@ -33,6 +33,7 @@ td{
       <table>
         <thead>
           <tr>
+            <th> Id </th>
             <th>Name</th>
             <th>Status</th>
             <th>Class</th>
@@ -43,6 +44,7 @@ td{
         <tbody>
           <% @categories.each do |category| %>
             <tr>
+              <td><%= category.id %></td>
               <td><%= category.name %></td>
               <td><%= category.status %></td>
               <td><%= category.parent_id.present?  ?   "sub_category" : "category" %></td>

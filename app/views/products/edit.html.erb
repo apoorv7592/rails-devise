@@ -12,7 +12,7 @@
 
 	  $(document).ready(function(){
 	  $("#remove").click(function () {
-	  $('#productsize').find('div:last').remove(); 
+	  $('#productsize').find('div').remove(); 
 	});
 	});
 </script>
@@ -60,12 +60,21 @@
 
 			<div class="row form-group">
 				<%= f.label 'Company', class: 'col-sm-2' %>
-				<%= select_tag :company_id, options_from_collection_for_select(Company.all, "id", "name"), :class => 'chosen-select' %>
+				<%= f.collection_select :company_id,
+				  Company.all ,:id,:name,
+				  { include_blank: true, selected: @valid_company},
+				  { class: 'chosen-select', :data => { :placeholder => 'Select Company ' }}
+				%>
+
 			</div>
 
 			<div class="row form-group">
 			   <%= f.label 'Categories', class: 'col-sm-2' %>
-			   <%= select_tag :product_categories, options_from_collection_for_select(Category.where("parent_id > ?", 0), "id", "name"), :multiple => true, :class => 'chosen-select' %>
+				<%= f.collection_select :product_categories,
+				  Category.where("parent_id > ?", 0) ,:id,:name,
+				  { include_blank: true, selected: @valid_category},
+				  { class: 'chosen-select', :multiple=>true, :data => { :placeholder => 'Select Categories ' }}
+				%>
 			</div>
 
 			<div class="row form-group">
@@ -75,6 +84,45 @@
 
 			<div style="border:2px solid black;width:730px;padding:20px;padding-left:0px;margin-bottom:20px;">
 			<h4> Product Sizes</h4>
+			<% @product_sizes.each do |element|  %>
+			<div id="productsizetable11">
+				<table>
+				  <tr>
+				    <th>Size</th>
+				    <th>Size Unit</th> 
+				    <th>Qty Available</th>
+				    <th>MRP</th>
+				    <th>Price</th> 
+				    <th>Weight</th>				    
+				    <th>Status</th>
+				  </tr>
+				  <tr>
+				    <td><input type="number" name="sizes[][size]" min=0 class="int_box" value = <%= element.size %> ></td>
+				    <td>
+				      <select name = "sizes[][size_unit]" class="chosen-select-size" >
+					    <option value="ml">ml</option>
+					    <option value="gm">gm</option>
+					    <option value="kg">kg</option>
+					    <option value="litre">litre</option>
+					    <option value="piece">piece</option>
+					  </select>
+					</td>
+				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box" value =<%= element.qty_avail%> ></td>
+				    <td><input type="number" name="sizes[][mrp]" min=0 class="int_box" value = <%= element.mrp %> ></td>
+				    <td><input type="number" name="sizes[][price]" min=0 class="int_box" value=<%= element.price %> ></td>
+				    <td><input type="number" name="sizes[][weight]" min=0 class="int_box" value=<%= element.weight %> ></td>
+				    <td>				      				      
+				      <select name = "sizes[][status]" class="chosen-select-size">
+					    <option value="enabled">enabled</option>
+					    <option value="disabled">disabled</option>
+					    <option value="discontinued">discontinued</option>
+					  </select>
+                    </td>
+				  </tr>
+				</table>
+            </div>
+            <% end %>
+
 			<div id="productsizetable">
 				<table>
 				  <tr>
@@ -89,7 +137,7 @@
 				  <tr>
 				    <td><input type="number" name="sizes[][size]" min=0 class="int_box"></td>
 				    <td>
-				      <select name = "sizes[][size_unit]" class="chosen-select-size">
+				      <select name = "sizes[][size_unit]" class="chosen-select-size" >
 					    <option value="ml">ml</option>
 					    <option value="gm">gm</option>
 					    <option value="kg">kg</option>

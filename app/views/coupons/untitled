@@ -1,0 +1,2 @@
+
+			   <%= f.collection_select(:valid_category, :id, Category.where("parent_id > ?", 0), :id, :name, :selected => @valid_category.map(&:id)}) %>

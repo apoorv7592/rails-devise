@@ -8,11 +8,11 @@
 	  console.log(count);
 	});
 	});
-
-
+</script>
+<script>
 	  $(document).ready(function(){
 	  $("#remove").click(function () {
-	  $('#productsize').find('div:last').remove(); 
+	  $('#productsize div').remove(); 
 	});
 	});
 </script>
@@ -42,7 +42,7 @@
 		<%= form_for @product, url: products_path, html: {class: 'form-horizontal'} do |f| %>
 			<div class="row form-group">
 				<%= f.label :name, class: 'col-sm-2' %>
-				<%= f.text_field :name, class: 'col-sm-6'%>
+				<%= f.text_field :name, class: 'col-sm-6', validate: { presence: true }%>
 			</div>
 
 			<div class="row form-group">
@@ -101,10 +101,9 @@
 					  </select>
 					</td>
 				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box"></td>
-				    <td>
 				    <td><input type="number" name="sizes[][mrp]" min=0 class="int_box"></td>
-				    <td>				      				    <td><input type="number" name="sizes[][price]" min=0 class="int_box"></td>
-				    <td>				      				    <td><input type="number" name="sizes[][weight]" min=0 class="int_box"></td>
+				    <td><input type="number" name="sizes[][price]" min=0 class="int_box"></td>
+				    <td><input type="number" name="sizes[][weight]" min=0 class="int_box"></td>
 				    <td>				      				      
 				      <select name = "sizes[][status]" class="chosen-select-size">
 					    <option value="enabled">enabled</option>

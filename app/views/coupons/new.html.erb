@@ -1,5 +1,90 @@
-<h1>New Coupon</h1>
+<script>
+ $(function(){
+ $(".chosen-select").chosen({width: "300px"});
+ });
+ </script>
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> New Coupon </h4>
+		<%= form_for @coupon, url: coupons_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label :code, class: 'col-sm-2' %>
+				<%= f.text_field :code%>
+			</div>
 
-<%= render 'form' %>
+			<div class="row form-group">
+			   <%= f.label 'Categories', class: 'col-sm-2' %>
+			   <%= select_tag :valid_category, options_from_collection_for_select(Category.where("parent_id > ?", 0), "id", "name"), :multiple => true, :class => 'chosen-select' %>
+			</div>
 
-<%= link_to 'Back', coupons_path %>
+			<div class="row form-group">
+			   <%= f.label 'Products', class: 'col-sm-2' %>
+			   <%= select_tag :valid_product, options_from_collection_for_select(Product.all, "id", "name"), :multiple => true, :class => 'chosen-select' %>
+			</div>
+			
+			<div class="row form-group">
+			   <%= f.label 'Companies', class: 'col-sm-2' %>
+			   <%= select_tag :valid_company, options_from_collection_for_select(Company.all, "id", "name"), :multiple => true, :class => 'chosen-select' %>
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.label :value, class: 'col-sm-2' %>
+				<%= f.text_field :value, class: 'col-sm-6'%>
+				
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :value_type, class: 'col-sm-2' %>
+                <%= f.radio_button :value_type, 'percentage', :checked => true  %> Percentage    
+                <%= f.radio_button :value_type, 'flat' %> Flat        
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :qualifying_amount, class: 'col-sm-2' %>
+				<%= f.text_field :qualifying_amount, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :max_discount, class: 'col-sm-2' %>
+				<%= f.text_field :max_discount, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :max_usage, class: 'col-sm-2' %>
+				<%= f.text_field :max_usage, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :max_usage_per_user, class: 'col-sm-2' %>
+				<%= f.text_field :max_usage_per_user, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :expire_date, class: 'col-sm-2' %>
+				<%= f.datetime_select :expire_date, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :start_date, class: 'col-sm-2' %>
+				<%= f.datetime_select :start_date, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :success_message, class: 'col-sm-2' %>
+				<%= f.text_field :success_message, class: 'col-sm-6'%>
+			</div>
+			<div class="row form-group">
+				<%= f.label :coupon_message, class: 'col-sm-2' %>
+				<%= f.text_field :coupon_message, class: 'col-sm-6'%>
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.label :status, class: 'col-sm-2' %>
+                <%= f.radio_button :status, 'disabled'  %> Disabled
+                <%= f.radio_button :status, 'enabled', :checked => true  %> Enabled    
+                <%= f.radio_button :status, 'discontinued' %> Discontinued        
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>

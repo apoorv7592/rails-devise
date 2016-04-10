@@ -22,7 +22,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if params[:cat_id].present?
+      @products = Category.find(params[:cat_id]).products.paginate(:page => params[:page], :per_page => 10)
+    elsif params[:company_id].present?
+      @products = Company.find(params[:company_id]).products.paginate(:page => params[:page], :per_page => 10)
+    else
+      @products = Product.paginate(:page => params[:page], :per_page => 10)
+    end
   end
 
   # GET /products/1
@@ -37,6 +43,9 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    @valid_category = @product.categories.pluck(:id)
+    @valid_company = @product.company_id.to_s
+    @product_sizes = @product.product_sizes
   end
 
   # POST /products
@@ -60,6 +69,9 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product.product_categories = params[:product][:product_categories].reject(&:empty?)
+    @product.sizes = params[:sizes]
+    @product.product_sizes.destroy_all
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
