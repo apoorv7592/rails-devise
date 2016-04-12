@@ -51,8 +51,8 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product.company_id = params[:company_id]
     @product = Product.new(product_params)
+    @product.company_id = params[:company_id]
     images = params[:product][:image]
     @product.sizes = params[:sizes]
     @product.product_categories = params[:product_categories]
@@ -72,6 +72,7 @@ class ProductsController < ApplicationController
   def update
     @product.product_categories = params[:product][:product_categories].reject(&:empty?)
     @product.sizes = params[:sizes]
+
     @product.product_sizes.destroy_all
     respond_to do |format|
       if @product.update(product_params)

@@ -28,6 +28,7 @@ class Product < ActiveRecord::Base
     attr_accessor :image, :sizes, :product_categories
     after_save :image_upload, :product_sizes_add, :product_categories_add
 
+
 	def image_upload
 	  image.each { |pic| self.images.create(image: pic) } if image.present?
 	end

@@ -19,8 +19,8 @@ class ProductSize < ActiveRecord::Base
 	belongs_to :product
 
 	enum status: [:disabled, :enabled, :discontinued]
-	enum size_unit: [:ml, :gm, :kg, :litre, :piece, :cartridge, :strip, :pad, :capsule, :pallet, :sachet, :cm, :metre]
+	enum size_unit: [:ml, :gm, :kg, :litre, :piece, :cartridge, :strip, :pad, :capsule, :pellet, :sachet, :cm, :metre]
 
-	validates_presence_of :size, :product_id, :qty_avail
+	validates_presence_of :size, :product_id, :message => "can't be empty"
 end
  

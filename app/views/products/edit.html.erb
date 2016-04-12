@@ -82,7 +82,7 @@
 				<%= f.file_field :image, :multiple => true %>
 			</div>
 
-			<div style="border:2px solid black;width:730px;padding:20px;padding-left:0px;margin-bottom:20px;">
+			<div style="border:2px solid black;width:730px;padding:20px;padding-left:10px;margin-bottom:20px;">
 			<h4> Product Sizes</h4>
 			<% @product_sizes.each do |element|  %>
 			<div id="productsizetable11">
@@ -105,6 +105,14 @@
 					    <option value="kg">kg</option>
 					    <option value="litre">litre</option>
 					    <option value="piece">piece</option>
+					    <option value="cartridge">cartridge</option>
+					    <option value="strip">strip</option>
+					    <option value="pad">pad</option>
+					    <option value="capsule">capsule</option>
+					    <option value="pellet">pellet</option>
+					    <option value="sachet">sachet</option>
+					    <option value="cm">cm</option>
+					    <option value="metre">metre</option>
 					  </select>
 					</td>
 				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box" value =<%= element.qty_avail%> ></td>
@@ -135,14 +143,22 @@
 				    <th>Status</th>
 				  </tr>
 				  <tr>
-				    <td><input type="number" name="sizes[][size]" min=0 class="int_box"></td>
-				    <td>
+				    <td><input type="number" name="sizes[][size]" min=0 class="int_box" ></td>
+				    <td class="int_box">
 				      <select name = "sizes[][size_unit]" class="chosen-select-size" >
 					    <option value="ml">ml</option>
 					    <option value="gm">gm</option>
 					    <option value="kg">kg</option>
 					    <option value="litre">litre</option>
 					    <option value="piece">piece</option>
+					    <option value="cartridge">cartridge</option>
+					    <option value="strip">strip</option>
+					    <option value="pad">pad</option>
+					    <option value="capsule">capsule</option>
+					    <option value="pellet">pellet</option>
+					    <option value="sachet">sachet</option>
+					    <option value="cm">cm</option>
+					    <option value="metre">metre</option>
 					  </select>
 					</td>
 				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box"></td>
@@ -161,9 +177,10 @@
             </div>
             <div id='productsize'></div>
 
-
-		    <input type="button" value="Add More Size" id="add">
-			<input type="button" value="Remove Last Size" id="remove">
+                <div style="margin-top:20px;margin-bottom:20px;padding-left:230px;">
+		          <input type="button" value="Add More Size" id="add">
+			      <input type="button" value="Remove Last Size" id="remove">
+			    </div>
 			</div>
 
 			<div class="row form-group">
