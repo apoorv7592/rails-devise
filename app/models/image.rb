@@ -33,15 +33,11 @@ class Image < ActiveRecord::Base
 	      :large => "-quality 80 -interlace Plane"
 	    },
         :path =>  "/products/:id/:style/:filename",
-	    # storage: :s3,
-     #              s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
-     #              bucket: ENV["AWS_BUCKET"]
-     #    }
-
-        storage: :s3,
-                  s3_credentials: {access_key_id: "AKIAJW4UIKMI3JP7OWDA", secret_access_key: "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"},
-                  bucket: "appy-development"
+	    storage: :s3,
+                  s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
+                  bucket: ENV["AWS_BUCKET"]
         }
+
 
 	  validates_attachment :image,
 	    :presence => true, 
