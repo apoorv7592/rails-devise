@@ -21,11 +21,19 @@ td{
 
 <p id="notice"><%= notice %></p>
 <div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+<h4><%= link_to "HOME", "/" %></h4>
   <h1 style="text-align:center;"> Listing Products</h1>
   </br>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <%= link_to 'New Product', new_product_path, class: 'pull-right', class: 'btn btn-primary'%>
+    </div>
+    <div class="col-md-4">
+    <%= form_tag search_products_path, :method => :get do %>
+    <p>
+      <%= text_field_tag :query, params[:query] %> <%= submit_tag "Search!" %>
+    </p>
+    <% end %>
     </div>
   </div>
   <div class="row" style="margin-top:30px;">
@@ -55,5 +63,8 @@ td{
         </tbody>
       </table>
     </div>
+        <%= will_paginate @products %>
   </div>
 </div>
+
+

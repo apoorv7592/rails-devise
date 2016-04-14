@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @coupon.code %>
+</p>
+
+<p>
+  <strong>Valid product:</strong>
+  <%= @coupon.valid_product %>
+</p>
+
+<p>
+  <strong>Valid category:</strong>
+  <%= @coupon.valid_category %>
+</p>
+
+<p>
+  <strong>Valid company:</strong>
+  <%= @coupon.valid_company %>
+</p>
+
+<p>
+  <strong>Valid city:</strong>
+  <%= @coupon.valid_city %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @coupon.value %>
+</p>
+
+<p>
+  <strong>Value type:</strong>
+  <%= @coupon.value_type %>
+</p>
+
+<p>
+  <strong>Qualifying amount:</strong>
+  <%= @coupon.qualifying_amount %>
+</p>
+
+<p>
+  <strong>Max discount:</strong>
+  <%= @coupon.max_discount %>
+</p>
+
+<p>
+  <strong>Max usage:</strong>
+  <%= @coupon.max_usage %>
+</p>
+
+<p>
+  <strong>Max usage per user:</strong>
+  <%= @coupon.max_usage_per_user %>
+</p>
+
+<p>
+  <strong>Expire date:</strong>
+  <%= @coupon.expire_date %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @coupon.start_date %>
+</p>
+
+<p>
+  <strong>Success message:</strong>
+  <%= @coupon.success_message %>
+</p>
+
+<p>
+  <strong>Coupon message:</strong>
+  <%= @coupon.coupon_message %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @coupon.status %>
+</p>
+
+<%= link_to 'Edit', edit_coupon_path(@coupon) %> |
+<%= link_to 'Back', coupons_path %>

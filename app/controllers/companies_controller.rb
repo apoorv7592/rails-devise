@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  contact    :string
+#  address    :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 

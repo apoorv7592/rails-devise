@@ -1,0 +1,76 @@
+
+<style>
+table, td, th {
+    border: 1px solid black;
+    text-align:center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+  background: #66cccc;
+  color:white;
+}
+
+td{
+  background: rgba(1,0,0,0.1);
+}
+</style>
+
+<p id="notice"><%= notice %></p>
+<div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+  <h1 style="text-align:center;"> Listing Coupons</h1>
+  </br>
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to 'New Coupon', new_coupon_path, class: 'pull-right', class: 'btn btn-primary'%>
+    </div>
+  </div>
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
+      <table>
+        <thead>
+          <tr>
+            <th> Id </th>
+            <th>Code</th>
+            <th>Value</th>
+            <th>Value type</th>
+            <th>Qualifying amount</th>
+            <th>Max discount</th>
+            <th>Max usage</th>
+            <th>Max usage per user</th>
+            <th>Expire date</th>
+            <th>Start date</th>
+            <th>Status</th>
+            <th colspan="3" >Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @coupons.each do |coupon| %>
+           <tr>
+            <td><%= coupon.id %></td>
+            <td><%= coupon.code %></td>
+            <td><%= coupon.value %></td>
+            <td><%= coupon.value_type %></td>
+            <td><%= coupon.qualifying_amount %></td>
+            <td><%= coupon.max_discount %></td>
+            <td><%= coupon.max_usage %></td>
+            <td><%= coupon.max_usage_per_user %></td>
+            <td><%= coupon.expire_date %></td>
+            <td><%= coupon.start_date %></td>
+            <td><%= coupon.status %></td>
+            <td><%= link_to 'Show', coupon %></td>
+            <td><%= link_to 'Edit', edit_coupon_path(coupon) %></td>
+            <td><%= link_to 'Destroy', coupon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id                 :integer          not null, primary key
+#  imageable_id       :integer
+#  imageable_type     :string
+#  image_file_name    :string
+#  image_content_type :string
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  alt_tag            :string
+#  details            :text
+#  priority           :integer
+#  sub_type           :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
 class Image < ActiveRecord::Base
 	  belongs_to :imageable, polymorphic: true
 	  has_attached_file :image, {
@@ -18,6 +37,7 @@ class Image < ActiveRecord::Base
                   s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
                   bucket: ENV["AWS_BUCKET"]
         }
+
 
 	  validates_attachment :image,
 	    :presence => true, 

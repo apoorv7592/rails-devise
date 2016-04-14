@@ -6,10 +6,12 @@
 				<%= f.label 'Product', class: 'col-sm-2' %>
 				<%= f.select :product_id,Product.all.collect{|d| [d.name,d.id]}, class: 'col-md-6'%>	
 			</div>
+			
 			<div class="row form-group">
 				<%= f.label :size, class: 'col-sm-2' %>
 				<%= f.text_field :size, class: 'col-sm-6'%>
 			</div>
+			
 			<div class="row form-group">
 				<%= f.label :size_unit, class: 'col-sm-2' %>
                 <%= f.radio_button :size_unit, 'ml'  %> ml
@@ -18,6 +20,21 @@
                 <%= f.radio_button :size_unit, 'litre'  %> litre    
                 <%= f.radio_button :size_unit, 'piece' %> piece                
 			</div>
+
+			<div class="row form-group">
+				<%= f.label :price, class: 'col-sm-2' %>
+				<%= f.text_field :price, class: 'col-sm-6'%>
+			</div>
+			
+			<div class="row form-group">
+				<%= f.label :mrp, class: 'col-sm-2' %>
+				<%= f.text_field :mrp, class: 'col-sm-6'%>
+			</div>	
+
+			<div class="row form-group">
+				<%= f.label :weight, class: 'col-sm-2' %>
+				<%= f.text_field :weight, class: 'col-sm-6'%>
+			</div>	
 
 			<div class="row form-group">
 				<%= f.label :qty_avail, class: 'col-sm-2' %>

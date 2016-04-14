@@ -26,10 +26,20 @@ gem "paperclip"
 gem 'aws-sdk', '< 2.0'# Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'annotate'
 
+gem 'roo', '~> 2.1.0' #for csv
 
+gem 'chosen-rails' #jquery select boxes
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'client_side_validations'
+
+gem 'will_paginate', '~> 3.0.6'
+
+gem 'sunspot_solr'
+gem 'sunspot_rails'
+gem 'progress_bar'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -54,6 +64,7 @@ gem 'omniauth-twitter'
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'
+
 
 group :development do
   gem 'better_errors'

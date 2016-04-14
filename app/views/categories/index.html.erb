@@ -21,6 +21,7 @@ td{
 
 <p id="notice"><%= notice %></p>
 <div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+<h4><%= link_to "HOME", "/" %></h4>
   <h1 style="text-align:center;"> Listing Categories</h1>
   </br>
   <div class="row">
@@ -33,6 +34,7 @@ td{
       <table>
         <thead>
           <tr>
+            <th> Id </th>
             <th>Name</th>
             <th>Status</th>
             <th>Class</th>
@@ -43,6 +45,7 @@ td{
         <tbody>
           <% @categories.each do |category| %>
             <tr>
+              <td><%= category.id %></td>
               <td><%= category.name %></td>
               <td><%= category.status %></td>
               <td><%= category.parent_id.present?  ?   "sub_category" : "category" %></td>
@@ -54,7 +57,15 @@ td{
         </tbody>
       </table>
     </div>
+
+    <%= form_tag import_categories_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+    <% end %>
   </div>
+
 </div>
+
+
 
 

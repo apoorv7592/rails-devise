@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: product_sizes
+#
+#  id         :integer          not null, primary key
+#  product_id :integer          not null
+#  size       :string           not null
+#  qty_avail  :integer          default(0)
+#  size_unit  :integer          default(0)
+#  status     :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  weight     :integer
+#  mrp        :integer
+#  price      :integer
+#
+
 class ProductSizesController < ApplicationController
   before_action :set_product_size, only: [:show, :edit, :update, :destroy]
 
@@ -68,6 +85,6 @@ class ProductSizesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_size_params
-      params.require(:product_size).permit(:product_id, :size, :qty_avail, :size_unit, :status)
+      params.require(:product_size).permit(:product_id, :size, :qty_avail, :size_unit, :status, :weight, :mrp, :price)
     end
 end
