@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
+  resources :addresses
+  resources :invoices
+  resources :orders
   resources :coupons
+  resources :order_products
+  resources :order_processes
   root 'welcome#index'
   resources :categories do
     collection { post :import }
   end
 
   resources :companies
-  resources :products
+  resources :products do
+    collection do
+      get :search
+    end
+  end
+
   resources :product_sizes
   resources :users
   get '/auth/:provider/callback' => 'sessions#create'

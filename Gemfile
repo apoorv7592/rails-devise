@@ -37,6 +37,10 @@ gem 'client_side_validations'
 
 gem 'will_paginate', '~> 3.0.6'
 
+gem 'sunspot_solr'
+gem 'sunspot_rails'
+gem 'progress_bar'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -60,6 +64,7 @@ gem 'omniauth-twitter'
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'
+
 
 group :development do
   gem 'better_errors'

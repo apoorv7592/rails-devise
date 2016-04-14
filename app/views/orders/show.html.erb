@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @order.address_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @order.user_id %>
+</p>
+
+<p>
+  <strong>Cod money:</strong>
+  <%= @order.cod_money %>
+</p>
+
+<p>
+  <strong>Shipping money:</strong>
+  <%= @order.shipping_money %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
+
+<p>
+  <strong>Is confirm:</strong>
+  <%= @order.is_confirm %>
+</p>
+
+<p>
+  <strong>Payment gateway:</strong>
+  <%= @order.payment_gateway %>
+</p>
+
+<p>
+  <strong>Admin user:</strong>
+  <%= @order.admin_user_id %>
+</p>
+
+<p>
+  <strong>Invoice:</strong>
+  <%= @order.invoice_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @order.note %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

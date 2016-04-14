@@ -13,6 +13,10 @@
 #
 
 class User < ActiveRecord::Base
+
+  has_many :addresses
+  has_many :orders
+
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

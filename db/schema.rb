@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405065644) do
+ActiveRecord::Schema.define(version: 20160414044655) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name", limit: 100
+    t.string   "last_name",  limit: 100
+    t.integer  "pincode"
+    t.text     "landmark"
+    t.text     "address"
+    t.string   "mobile",     limit: 15
+    t.integer  "status",     limit: 1,   default: 1
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "addresses", ["city"], name: "index_addresses_on_city"
+  add_index "addresses", ["country"], name: "index_addresses_on_country"
+  add_index "addresses", ["first_name"], name: "index_addresses_on_first_name"
+  add_index "addresses", ["last_name"], name: "index_addresses_on_last_name"
+  add_index "addresses", ["pincode"], name: "index_addresses_on_pincode"
+  add_index "addresses", ["state"], name: "index_addresses_on_state"
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -70,6 +94,69 @@ ActiveRecord::Schema.define(version: 20160405065644) do
   end
 
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "order_id"
+    t.text     "invoice_note"
+    t.integer  "admin_user_id"
+    t.datetime "invoice_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "invoices", ["invoice_date"], name: "index_invoices_on_invoice_date"
+  add_index "invoices", ["order_id"], name: "index_invoices_on_order_id"
+
+  create_table "order_processes", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "barcode",        limit: 50
+    t.integer  "courier_id"
+    t.text     "rto_reason"
+    t.datetime "packing_date"
+    t.datetime "shipping_date"
+    t.datetime "delivered_date"
+    t.datetime "rto_date"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "order_processes", ["barcode"], name: "index_order_processes_on_barcode"
+  add_index "order_processes", ["courier_id"], name: "index_order_processes_on_courier_id"
+  add_index "order_processes", ["order_id"], name: "index_order_processes_on_order_id"
+  add_index "order_processes", ["packing_date"], name: "index_order_processes_on_packing_date"
+  add_index "order_processes", ["rto_date"], name: "index_order_processes_on_rto_date"
+  add_index "order_processes", ["shipping_date"], name: "index_order_processes_on_shipping_date"
+
+  create_table "order_products", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_size_id"
+    t.integer  "quantity"
+    t.float    "price"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "order_products", ["order_id"], name: "index_order_products_on_order_id"
+  add_index "order_products", ["product_size_id"], name: "index_order_products_on_product_size_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "address_id"
+    t.integer  "user_id"
+    t.integer  "cod_money"
+    t.integer  "shipping_money"
+    t.integer  "status"
+    t.integer  "is_confirm"
+    t.integer  "payment_gateway"
+    t.integer  "admin_user_id"
+    t.integer  "invoice_id"
+    t.text     "note"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "orders", ["is_confirm"], name: "index_orders_on_is_confirm"
+  add_index "orders", ["status"], name: "index_orders_on_status"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "product_categories", force: :cascade do |t|
     t.integer  "product_id"

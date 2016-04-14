@@ -72,7 +72,6 @@ class ProductsController < ApplicationController
   def update
     @product.product_categories = params[:product][:product_categories].reject(&:empty?)
     @product.sizes = params[:sizes]
-
     @product.product_sizes.destroy_all
     respond_to do |format|
       if @product.update(product_params)
@@ -94,6 +93,21 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # GET /books/search
+  # GET /books/search.xml
+  def search
+    @search = Product.search do
+      paginate(:page => params[:page], :per_page => 10)
+      fulltext params[:query]
+    end
+    @products = @search.results
+    respond_to do |format|
+      format.html { render :action => "index" }
+      format.json { render :action => "index"  }
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

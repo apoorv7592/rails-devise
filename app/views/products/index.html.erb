@@ -25,8 +25,15 @@ td{
   <h1 style="text-align:center;"> Listing Products</h1>
   </br>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <%= link_to 'New Product', new_product_path, class: 'pull-right', class: 'btn btn-primary'%>
+    </div>
+    <div class="col-md-4">
+    <%= form_tag search_products_path, :method => :get do %>
+    <p>
+      <%= text_field_tag :query, params[:query] %> <%= submit_tag "Search!" %>
+    </p>
+    <% end %>
     </div>
   </div>
   <div class="row" style="margin-top:30px;">
@@ -59,3 +66,5 @@ td{
         <%= will_paginate @products %>
   </div>
 </div>
+
+

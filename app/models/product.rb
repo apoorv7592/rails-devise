@@ -28,6 +28,25 @@ class Product < ActiveRecord::Base
     attr_accessor :image, :sizes, :product_categories
     after_save :image_upload, :product_sizes_add, :product_categories_add
 
+  searchable do
+    text :name
+
+    text :description, :boost => 2
+    integer :id, :stored => true
+
+    string :url, :stored => true
+    integer :rank, :stored => true
+    
+    text :product_sizes, :stored =>true do
+      product_sizes.enabled.map { |product_size| [product_size.id, product_size.size, product_size.qty_avail, product_size.mrp, product_size.price].join('|') }
+    end
+    
+
+    text :images, :stored =>true do
+      images.map { |image| [image.image_file_name].join('|') }
+    end
+  end
+
 
 	def image_upload
 	  image.each { |pic| self.images.create(image: pic) } if image.present?
