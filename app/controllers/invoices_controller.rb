@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: invoices
+#
+#  id            :integer          not null, primary key
+#  order_id      :integer
+#  invoice_note  :text
+#  admin_user_id :integer
+#  invoice_date  :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
