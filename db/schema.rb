@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20160414044655) do
     t.integer  "user_id"
     t.integer  "cod_money"
     t.integer  "shipping_money"
-    t.integer  "status"
+    t.integer  "status",          default: 0
     t.integer  "is_confirm",      default: 0
     t.integer  "payment_gateway"
     t.integer  "admin_user_id"

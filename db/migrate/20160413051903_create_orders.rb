@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :user_id, index: true
       t.integer :cod_money
       t.integer :shipping_money
-      t.integer :status, index: true
+      t.integer :status, index: true, default:0 
       t.integer :is_confirm, index: true, default:0 
       t.integer :payment_gateway
       t.integer :admin_user_id
