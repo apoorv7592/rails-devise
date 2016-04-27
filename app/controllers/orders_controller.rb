@@ -29,6 +29,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @ids = @order.order_products.pluck(:product_size_id)
+    @sizes = ProductSize.where(id: @ids) 
   end
 
   # GET /orders/new
@@ -60,7 +62,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_path , notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

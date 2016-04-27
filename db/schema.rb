@@ -145,13 +145,13 @@ ActiveRecord::Schema.define(version: 20160414044655) do
     t.integer  "cod_money"
     t.integer  "shipping_money"
     t.integer  "status"
-    t.integer  "is_confirm"
+    t.integer  "is_confirm",      default: 0
     t.integer  "payment_gateway"
     t.integer  "admin_user_id"
     t.integer  "invoice_id"
     t.text     "note"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "orders", ["is_confirm"], name: "index_orders_on_is_confirm"
