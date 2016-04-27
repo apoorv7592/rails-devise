@@ -25,11 +25,11 @@ class Order < ActiveRecord::Base
     belongs_to :user
     belongs_to :address
     after_save :order_confirm, if: lambda {|order| order.status == "order_placed" and order.is_confirm_changed? and order.is_confirm_was == "not confirm" and order.is_confirm == "confirm" }
-    after_save :order_placed, if: lambda {|order| order.is_status_changed? and order.is_status_was == nil and order.status == "order_placed" }
-    after_save :order_packed, if: lambda {|order| order.is_status_changed? and order.is_status_was == "order_placed" and order.status == "packed" }
-    after_save :order_shipped, if: lambda {|order| order.is_status_changed? and order.is_status_was == "packed" and order.status == "shipped" }
-    after_save :order_delivered, if: lambda {|order| order.is_status_changed? and order.is_status_was == "shipped" and order.status == "delivered" }
-    after_save :order_cancelled, if: lambda {|order| order.is_status_changed? and order.is_status_was == "delivered" and order.status == "cancelled" }
+    after_save :order_placed, if: lambda {|order| order.status_changed? and order.status_was == nil and order.status == "order_placed" }
+    after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "packed" }
+    after_save :order_shipped, if: lambda {|order| order.status_changed? and order.status_was == "packed" and order.status == "shipped" }
+    after_save :order_delivered, if: lambda {|order| order.status_changed? and order.status_was == "shipped" and order.status == "delivered" }
+    after_save :order_cancelled, if: lambda {|order| order.status_changed? and order.status_was == "delivered" and order.status == "cancelled" }
     accepts_nested_attributes_for :order_products, allow_destroy: true
 
 	enum status: [:order_placed, :failed, :under_packing, :packed, :shipped, :cancelled, :rto, :delivered]
