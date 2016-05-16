@@ -1,5 +1,5 @@
 class OrderConfirmMailer < ApplicationMailer
-
+include Resque::Mailer
   default from: "from@example.com"
 
   def order_placed(order)
