@@ -37,35 +37,35 @@ class Order < ActiveRecord::Base
 	enum is_confirm: ["not confirm", :confirm]
 
     def order_confirm
-      OrderConfirmMailer.order_confirm(self).deliver_now 
+      OrderConfirmMailer.order_confirm(self).deliver
     end
 
     def order_placed
-      OrderConfirmMailer.order_placed(self).deliver_now 
+      OrderConfirmMailer.order_placed(self).deliver
     end
 
     def order_packed
       packdate = OrderProcess.find_or_create_by(order_id: self.id)
       packdate.packing_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_packed(self).deliver_now 
+      OrderConfirmMailer.order_packed(self).deliver
     end
     
     def order_shipped
       packdate = OrderProcess.find_by(order_id: self.id)
       packdate.shipping_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_shipped(self).deliver_now 
+      OrderConfirmMailer.order_shipped(self).deliver 
     end
 
     def order_delivered
       packdate = OrderProcess.find_by(order_id: self.id)
       packdate.delivered_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_delivered(self).deliver_now 
+      OrderConfirmMailer.order_delivered(self).deliver
     end    
 
     def order_cancelled
-      OrderConfirmMailer.order_cancelled(self).deliver_now 
+      OrderConfirmMailer.order_cancelled(self).deliver
     end
 end

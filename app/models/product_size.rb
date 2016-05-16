@@ -22,5 +22,12 @@ class ProductSize < ActiveRecord::Base
 	enum size_unit: [:ml, :gm, :kg, :litre, :piece, :cartridge, :strip, :pad, :capsule, :pellet, :sachet, :cm, :metre]
 
 	validates_presence_of :size, :product_id, :message => "can't be empty"
+
+
+	def product_amount
+
+
+
+	end
 end
  

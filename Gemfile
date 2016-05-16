@@ -41,6 +41,9 @@ gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
 
+gem 'resque'
+gem 'resque_mailer'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
