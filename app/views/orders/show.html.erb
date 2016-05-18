@@ -2,12 +2,46 @@
 
 <p>
   <strong>Address:</strong>
-  <%= @order.address_id %>
+     <h6><b>Name :</b></h6><%= @order.address.first_name %>  <%= @order.address.last_name %> 
+     <h6><b>Pincode :</b></h6><%= @order.address.pincode %>  
+     <h6><b>Address :</b></h6><%= @order.address.landmark %> <%= @order.address.address %> 
+     <h6><b>Mobile :</b></h6><%= @order.address.mobile %> 
+     <h6><b>City :</b></h6><%= @order.address.city %> 
+     <h6><b>State :</b></h6><%= @order.address.state %> 
+     <h6><b>Country :</b></h6><%= @order.address.country %>
 </p>
 
 <p>
   <strong>User:</strong>
-  <%= @order.user_id %>
+  <%= @order.user.name %>
+  <br/><%= @order.user.email %>
+  <br/><%= @order.user.phone %>
+</p>
+
+
+<p>
+  <strong>Products:</strong>
+    <div class="col-md-12">
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Size</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @sizes.each do |product| %>
+            <tr>
+              <td><%= product.product.name %></td>
+              <td><%= product.size %> <%= product.size_unit %></td>
+              <td><%= @order.order_products.where(product_size_id:product.id).pluck(:quantity).join(',').to_i  %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 </p>
 
 <p>
@@ -33,11 +67,6 @@
 <p>
   <strong>Payment gateway:</strong>
   <%= @order.payment_gateway %>
-</p>
-
-<p>
-  <strong>Admin user:</strong>
-  <%= @order.admin_user_id %>
 </p>
 
 <p>
