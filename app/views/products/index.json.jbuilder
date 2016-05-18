@@ -15,3 +15,7 @@ json.product do |json|
       end 
   end
 end
+
+json.metadata do |json|
+  json.count @count
+end

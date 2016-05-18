@@ -24,10 +24,13 @@ class ProductsController < ApplicationController
   def index
     if params[:cat_id].present?
       @products = Category.find(params[:cat_id]).products.paginate(:page => params[:page], :per_page => 10)
+      @count = @products.count
     elsif params[:company_id].present?
       @products = Company.find(params[:company_id]).products.paginate(:page => params[:page], :per_page => 10)
+      @count = @products.count
     else
       @products = Product.paginate(:page => params[:page], :per_page => 10)
+      @count = @products.count
     end
   end
 
