@@ -52,6 +52,8 @@
          Class names starting with "solr" refer to java classes in the
        org.apache.solr.analysis package.
     -->
+
+    
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="string" class="solr.StrField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
