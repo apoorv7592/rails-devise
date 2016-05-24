@@ -41,6 +41,7 @@ class ProductSizesController < ApplicationController
   # POST /product_sizes
   # POST /product_sizes.json
   def create
+    binding.pry
     @product_size = ProductSize.new(product_size_params)
     respond_to do |format|
       if @product_size.save

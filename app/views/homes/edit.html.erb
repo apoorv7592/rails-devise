@@ -1,0 +1,39 @@
+<h1>Editing Home</h1>
+
+<div class="row">
+	<div class="col-sm-offset-2">
+	<h4> Home screen Edit</h4>
+		<%= form_for @home, url: home_path, html: {class: 'form-horizontal'} do |f| %>
+			<div class="row form-group">
+				<%= f.label "Banner/Offer Name", class: 'col-sm-2' %>
+				<%= f.text_field :banner_name, class: 'col-sm-6', validate: { presence: true }%>
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :path, class: 'col-sm-2' %>
+				<%= f.text_field :path, class: 'col-sm-6'%>	
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :rank, class: 'col-sm-2' %>
+                <%= f.radio_button :rank, '1', :checked => true  %> 1
+                <%= f.radio_button :rank, '2'%> 2 
+                <%= f.radio_button :rank, '3'%> 3    
+                <%= f.radio_button :rank, '4'%> 4       
+			</div>
+
+			<div class="row form-group">
+				<%= f.label :classified_as, class: 'col-sm-2' %>
+                <%= f.radio_button :classified_as, 'banner'  %> Banner
+                <%= f.radio_button :classified_as, 'offer', :checked => true  %> Offer    
+			</div>
+
+
+			<div class="row form-group">
+				<%= f.submit 'Submit', class: 'btn btn-primary col-sm-4 col-sm-offset-2' %>
+			</div>
+		<% end %>
+	</div>
+</div>
+<%= link_to 'Show', @home %> |
+<%= link_to 'Back', homes_path %>
