@@ -36,9 +36,9 @@ class Image < ActiveRecord::Base
         #:path =>  "/{image_path}/:id/:style/:filename",
         :path =>  :set_path,
         storage: :s3,
-                  s3_credentials: {access_key_id: "AKIAJW4UIKMI3JP7OWDA", secret_access_key: "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"},
-                  bucket: "appy-development"
-        }
+        s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
+        bucket: ENV["AWS_BUCKET"]		        
+      }
 
 
 	  validates_attachment :image,
