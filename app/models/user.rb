@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :addresses
   has_many :orders
-
+  
+  #has_secure_password
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

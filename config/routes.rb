@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :homes
   mount Resque::Server.new, :at => "/resque"
   
-  resources :addresses
+  resources :addresses,:defaults => { :format => :json }
   resources :invoices
-  resources :orders
+  resources :orders,:defaults => { :format => :json }
   resources :coupons
   resources :order_products
   resources :order_processes
@@ -23,9 +23,11 @@ Rails.application.routes.draw do
   end
 
   resources :product_sizes
-  resources :users
-  get '/auth/:provider/callback' => 'sessions#create'
+
+  get '/signup'  => 'users#new' 
   get '/signin' => 'sessions#new', :as => :signin
+  resources :users
+  post '/signin' => 'sessions#create'
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
 
