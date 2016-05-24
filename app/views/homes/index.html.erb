@@ -1,0 +1,77 @@
+<style>
+table, td, th {
+    border: 1px solid black;
+    text-align:center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+  background: #66cccc;
+  color:white;
+}
+
+td{
+  background: rgba(1,0,0,0.1);
+}
+</style>
+<p id="notice"><%= notice %></p>
+
+<h3> Important Note: There should be exactly 4 banners and 4 offers present at any point of time</h3>
+<h4><%= link_to "HOME", "/" %></h4>
+<div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+<h1>Listing Homes</h1>
+  </br>
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
+<table>
+  <thead>
+    <tr>
+      <th>Id </th>
+      <th>Name</th>
+      <th>Path</th>
+      <th>Rank</th>
+      <th>Classified as</th>
+      <th>Image</th>
+      <th colspan="3">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @banner.each do |home| %>
+      <tr>
+        <td><%= home.id %></td>
+        <td><%= home.banner_name %></td>
+        <td><%= home.path %></td>
+        <td><%= home.rank %></td>
+        <td><%= home.classified_as %></td>
+        <td><%= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
+        <td><%= link_to 'Show', home %></td>
+        <td><%= link_to 'Edit', edit_home_path(home) %></td>
+        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <% @offer.each do |home| %>
+      <tr>
+        <td><%= home.id %></td>
+        <td><%= home.banner_name %></td>
+        <td><%= home.path %></td>
+        <td><%= home.rank %></td>
+        <td><%= home.classified_as %></td>
+        <td><%= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
+        <td><%= link_to 'Show', home %></td>
+        <td><%= link_to 'Edit', edit_home_path(home) %></td>
+        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>
+<br>
+
+<%= link_to 'New Home', new_home_path, class: 'pull-right', class: 'btn btn-primary' %>

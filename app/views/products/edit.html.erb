@@ -28,6 +28,7 @@
  $(".chosen-select-size").chosen({width: "100px"});
  });
  </script>
+
 <style type="text/css">
 	.int_box
 	{
@@ -99,7 +100,7 @@
 				  <tr>
 				    <td><input type="number" name="sizes[][size]" min=0 class="int_box" value = <%= element.size %> ></td>
 				    <td>
-				      <select name = "sizes[][size_unit]" class="chosen-select-size" >
+				      <select name = "sizes[][size_unit]" class="chosen-select-size" id="drop">
 					    <option value="ml">ml</option>
 					    <option value="gm">gm</option>
 					    <option value="kg">kg</option>
@@ -113,6 +114,7 @@
 					    <option value="sachet">sachet</option>
 					    <option value="cm">cm</option>
 					    <option value="metre">metre</option>
+					    <option value="inch">inch</option>
 					  </select>
 					</td>
 				    <td><input type="number" name="sizes[][qty_avail]" min=0 class="int_box" value =<%= element.qty_avail%> ></td>

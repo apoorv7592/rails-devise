@@ -19,6 +19,7 @@
 
 class Image < ActiveRecord::Base
 	  belongs_to :imageable, polymorphic: true
+	  before_create :set_path
 	  has_attached_file :image, {
 	    :styles => {
 		    thumb: '100x100>',
@@ -32,11 +33,12 @@ class Image < ActiveRecord::Base
 	      :square => "-quality 80 -interlace Plane",
 	      :large => "-quality 80 -interlace Plane"
 	    },
-        :path =>  "/products/:id/:style/:filename",
-	    storage: :s3,
-                  s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
-                  bucket: ENV["AWS_BUCKET"]
-        }
+        #:path =>  "/{image_path}/:id/:style/:filename",
+        :path =>  :set_path,
+        storage: :s3,
+        s3_credentials: {access_key_id: ENV["AWS_ACCESS_KEY_ID"], secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"]},
+        bucket: ENV["AWS_BUCKET"]		        
+      }
 
 
 	  validates_attachment :image,
@@ -45,6 +47,14 @@ class Image < ActiveRecord::Base
 	    :content_type => { :content_type => /^image\/(jpeg|png|gif)$/ }   
 
 
+      def set_path
+      	if self.imageable_type == "Product"
+      	  image_path = "products/:id/:style/:filename"
+      	elsif self.imageable_type == "Home"
+      	   image_path = "home/:id/:style/:filename"
+      	end
+      	image_path
+      end
 end
 
 

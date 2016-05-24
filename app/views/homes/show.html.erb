@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Banner name:</strong>
+  <%= @home.banner_name %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @home.path %>
+</p>
+
+<p>
+  <strong>Classified as:</strong>
+  <%= @home.classified_as %>
+</p>
+
+<%= link_to 'Edit', edit_home_path(@home) %> |
+<%= link_to 'Back', homes_path %>
