@@ -48,7 +48,7 @@ td{
         <td><%= home.path %></td>
         <td><%= home.rank %></td>
         <td><%= home.classified_as %></td>
-        <td><%= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
+        <td><%#= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
         <td><%= link_to 'Show', home %></td>
         <td><%= link_to 'Edit', edit_home_path(home) %></td>
         <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -61,7 +61,7 @@ td{
         <td><%= home.path %></td>
         <td><%= home.rank %></td>
         <td><%= home.classified_as %></td>
-        <td><%= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
+        <td><%#= image_tag "https://s3.amazonaws.com/appy-development/home/#{home.images[0].id}/thumb/#{home.images[0].image_file_name}" %></td>
         <td><%= link_to 'Show', home %></td>
         <td><%= link_to 'Edit', edit_home_path(home) %></td>
         <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>

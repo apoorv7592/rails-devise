@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :homes
   mount Resque::Server.new, :at => "/resque"
   
-  resources :addresses,:defaults => { :format => :json }
+  resources :addresses
   resources :invoices
-  resources :orders,:defaults => { :format => :json }
+  resources :orders
   resources :coupons
   resources :order_products
   resources :order_processes

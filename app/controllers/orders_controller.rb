@@ -7,8 +7,8 @@
 #  user_id         :integer
 #  cod_money       :integer
 #  shipping_money  :integer
-#  status          :integer
-#  is_confirm      :integer
+#  status          :integer          default(0)
+#  is_confirm      :integer          default(0)
 #  payment_gateway :integer
 #  admin_user_id   :integer
 #  invoice_id      :integer
