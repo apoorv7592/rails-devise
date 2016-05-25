@@ -1,3 +1,8 @@
+<script>
+   $(document).ready(function(){
+            $(".chosen-select").chosen()
+    });
+ </script>
 <div class="row">
 	<div class="col-sm-offset-2">
 	<h4> Home screen </h4>
@@ -8,9 +13,15 @@
 			</div>
 
 			<div class="row form-group">
-				<%= f.label :path, class: 'col-sm-2' %>
-				<%= f.text_field :path, class: 'col-sm-6'%>	
+			   <%= f.label 'Categories Path', class: 'col-sm-2' %>
+			   <%= select_tag "categories_path", options_from_collection_for_select(Category.where("parent_id > ?", 0), "id", "name"), :class => 'chosen-select' %>
 			</div>
+
+			<div class="row form-group">
+			   <%= f.label 'Products Path', class: 'col-sm-2' %>
+			   <%= select_tag "products_path", options_from_collection_for_select(Product.all, "id", "name"), :class => 'chosen-select' %>
+			</div>
+
 
 			<div class="row form-group">
 				<%= f.label :rank, class: 'col-sm-2' %>

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: homes
+#
+#  id            :integer          not null, primary key
+#  banner_name   :string
+#  path          :string
+#  classified_as :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  rank          :integer
+#
+
 class HomesController < ApplicationController
   before_action :set_home, only: [:show, :edit, :update, :destroy]
 
@@ -28,6 +41,12 @@ class HomesController < ApplicationController
   # POST /homes.json
   def create
     @home = Home.new(home_params)
+    cat_id = Category.find_by_id(params[:categories_path].to_i).parent_id
+    path = {}
+    path.merge!(cat_id: cat_id)
+    path.merge!(subcat_id: params[:categories_path])
+    path.merge!(product_id: params[:products_path])
+    @home.path = path
     images = params[:home][:image]
     respond_to do |format|
       if @home.save
@@ -73,6 +92,6 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:banner_name, :path, :classified_as, :rank, image: [])
+      params.require(:home).permit(:banner_name, :classified_as, :rank, image: [], path: {})
     end
 end

@@ -19,5 +19,5 @@ end
 
 
 json.process do |json|
-  json.extract! @order.order_process, :barcode, :courier_id, :rto_reason, :rto_date, :shipping_date, :packing_date, :delivered_date, :rto_date
+  json.extract! @order.order_process, :barcode, :courier_id, :rto_reason, :rto_date, :shipping_date, :packing_date, :delivered_date, :rto_date if @order.order_process.present?
 end

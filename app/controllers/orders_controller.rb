@@ -7,8 +7,8 @@
 #  user_id         :integer
 #  cod_money       :integer
 #  shipping_money  :integer
-#  status          :integer
-#  is_confirm      :integer
+#  status          :integer          default(0)
+#  is_confirm      :integer          default(0)
 #  payment_gateway :integer
 #  admin_user_id   :integer
 #  invoice_id      :integer
@@ -48,10 +48,8 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
-        format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
