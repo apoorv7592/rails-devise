@@ -29,8 +29,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @ids = @order.order_products.pluck(:product_size_id)
-    @sizes = ProductSize.where(id: @ids) 
+    @order_products = @order.order_products
   end
 
   # GET /orders/new
