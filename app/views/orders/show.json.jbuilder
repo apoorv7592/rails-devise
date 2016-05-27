@@ -18,6 +18,8 @@ json.products do |json|
 	  	 json.company_name op.product_size.product.company.name
 	  	 json.size op.product_size.size
 	  	 json.unit op.product_size.size_unit
+	  	 json.price op.product_size.price
+	  	 json.mrp op.product_size.mrp
 		 json.images do |json|
 			  json.square "https://s3.amazonaws.com/appy-development/products/#{op.product_size.product.images.first.id}/square/#{op.product_size.product.images.first.image_file_name}" if op.product_size.product.images.first.present?
 
