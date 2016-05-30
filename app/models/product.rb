@@ -53,7 +53,6 @@ class Product < ActiveRecord::Base
 	end
 
     def product_sizes_add
-      binding.pry
       sizes.map { |size| ProductSize.create(product_id:self.id,size:size["size"],size_unit:size["size_unit"],qty_avail:size["qty_avail"],mrp:size["mrp"],price:size["price"],weight:size["weight"],status:size["status"]) }  if sizes.present?
     end
 
