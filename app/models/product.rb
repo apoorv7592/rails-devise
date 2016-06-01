@@ -52,12 +52,12 @@ class Product < ActiveRecord::Base
 	  image.each { |pic| self.images.create(image: pic) } if image.present?
 	end
 
-    def product_sizes_add
-      unit = sizes[0]["size_unit"]["unit"]
-      sizes.map { |size| ProductSize.create(product_id:self.id,size:size["size"],size_unit:unit,qty_avail:size["qty_avail"],mrp:size["mrp"],price:size["price"],weight:size["weight"],status:size["status"]) }  if sizes.present?
-    end
+  def product_sizes_add
+    unit = sizes[0]["size_unit"]["unit"]
+    sizes.map { |size| ProductSize.create(product_id:self.id,size:size["size"],size_unit:unit,qty_avail:size["qty_avail"],mrp:size["mrp"],price:size["price"],weight:size["weight"],status:size["status"]) }  if sizes.present?
+  end
 
-    def product_categories_add
-      product_categories.map { |pc| ProductCategory.create(product_id:self.id,category_id: pc) } if product_categories.present?
-    end
+  def product_categories_add
+    product_categories.map { |pc| ProductCategory.create(product_id:self.id,category_id: pc) } if product_categories.present?
+  end
 end

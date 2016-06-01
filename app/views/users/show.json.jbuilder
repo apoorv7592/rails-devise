@@ -9,7 +9,7 @@ end
 
 json.orders do |json|
 	json.array!(@orders) do |order|
-		json.extract! order, :id, :status, :created_at
+		json.extract! order, :id, :status, :created_at, :final_amount
 		json.products do |json|
 			json.array! order.order_products do |op|
 				json.product_size_id op.product_size_id

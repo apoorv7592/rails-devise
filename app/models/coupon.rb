@@ -35,8 +35,6 @@ class Coupon < ActiveRecord::Base
     #date check
     #qualifying amount check
  
-
-
     def coupon_check(code,product_id)
 
 
