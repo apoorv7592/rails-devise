@@ -41,6 +41,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
+    @array = ProductSize.size_units.keys
     @product = Product.new
   end
 
@@ -49,14 +50,17 @@ class ProductsController < ApplicationController
     @valid_category = @product.categories.pluck(:id)
     @valid_company = @product.company_id.to_s
     @product_sizes = @product.product_sizes
+    @valid_unit = @product_sizes[0].size_unit
+    @array = ProductSize.size_units.keys
   end
+
 
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(product_params)
     @product.company_id = params[:company_id]
-    images = params[:product][:image]
+    images = params[:product][:image] if params[:product][:image].present?
     @product.sizes = params[:sizes]
     @product.product_categories = params[:product_categories]
     respond_to do |format|

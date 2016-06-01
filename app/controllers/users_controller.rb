@@ -12,7 +12,7 @@
 #  updated_at :datetime         not null
 #
 
-class UsersController < ApplicationController
+class UsersController < ApplicationController   
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @orders= @user.orders.includes(:order_products)
   end
 
   # GET /users/new
