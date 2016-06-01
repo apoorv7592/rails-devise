@@ -1,35 +1,36 @@
 require 'resque/server'
 Rails.application.routes.draw do
 
-  resources :homes
+  
   mount Resque::Server.new, :at => "/resque"
   
-  resources :addresses
-  resources :invoices
-  resources :orders
-  resources :coupons
-  resources :order_products
-  resources :order_processes
-  root 'welcome#index'
-  resources :categories do
-    collection { post :import }
-  end
-
-  resources :companies
-  resources :products do
-    collection do
-      get :search
+    resources :homes
+    resources :addresses
+    resources :invoices
+    resources :orders
+    resources :coupons
+    resources :order_products
+    resources :order_processes
+    root 'welcome#index'
+    resources :categories do
+      collection { post :import }
     end
-  end
 
-  resources :product_sizes
+    resources :companies
+    resources :products do
+      collection do
+        get :search
+      end
+    end
 
-  get '/signup'  => 'users#new' 
-  get '/signin' => 'sessions#new', :as => :signin
-  resources :users
-  post '/signin' => 'sessions#create'
-  get '/signout' => 'sessions#destroy', :as => :signout
-  get '/auth/failure' => 'sessions#failure'
+    resources :product_sizes
+
+    get '/signup'  => 'users#new' 
+    get '/signin' => 'sessions#new', :as => :signin
+    resources :users
+    post '/signin' => 'sessions#create'
+    get '/signout' => 'sessions#destroy', :as => :signout
+    get '/auth/failure' => 'sessions#failure'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

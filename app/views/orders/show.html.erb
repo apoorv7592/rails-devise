@@ -32,11 +32,11 @@
         </thead>
 
         <tbody>
-          <% @sizes.each do |product| %>
+          <% @order_products.each do |product| %>
             <tr>
-              <td><%= product.product.name %></td>
-              <td><%= product.size %> <%= product.size_unit %></td>
-              <td><%= @order.order_products.where(product_size_id:product.id).pluck(:quantity).join(',').to_i  %></td>
+              <td><%= product.product_size.product.name %></td>
+              <td><%= product.product_size.size %> <%= product.product_size.size_unit %></td>
+              <td><%= product.quantity  %></td>
             </tr>
           <% end %>
         </tbody>
