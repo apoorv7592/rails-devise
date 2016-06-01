@@ -95,7 +95,6 @@ class Order < ActiveRecord::Base
     end
 
     def set_discount
-      binding.pry
       coupon = Coupon.where(code:coupon_code).first if Coupon.where(code:coupon_code).present?
       if (self.amount >= coupon.qualifying_amount) and (coupon.expire_date > Date.today) and (coupon.start_date  < Date.today + 1.day)  and (coupon.status == "enabled")
         @total_discount_value = coupon.value_type=="percentage" ? (coupon.value * amount * 0.01) : coupon.value
