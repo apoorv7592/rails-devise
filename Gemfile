@@ -69,6 +69,7 @@ gem 'pundit'
 gem 'simple_form'
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'pry-rails'
 
 
 group :development do
@@ -85,7 +86,6 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rubocop'
