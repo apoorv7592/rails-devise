@@ -49,7 +49,7 @@ td{
           <% @orders.each do |order| %>
             <tr>
               <td><%= order.id %></td>
-              <td><%= order.order_products.sum(:quantity)%></td>
+              <td><%= order.total_quantity %></td>
               <td><%= order.address.address%><br><%= order.address.landmark%><br>city: <%= order.address.city%><br>
               mobile: <%= order.address.mobile%><br>pincode: <%= order.address.pincode%></td>
               <td><%= order.user.name if order.user_id.present? %></td>
