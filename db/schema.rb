@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529173616) do
+ActiveRecord::Schema.define(version: 20160602165700) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
@@ -89,6 +89,15 @@ ActiveRecord::Schema.define(version: 20160529173616) do
     t.integer  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.boolean  "enabled"
+    t.string   "platform"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "homes", force: :cascade do |t|
@@ -227,8 +236,10 @@ ActiveRecord::Schema.define(version: 20160529173616) do
     t.string   "password"
     t.string   "phone"
     t.integer  "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "password_salt"
+    t.string   "password_hash"
   end
 
 end

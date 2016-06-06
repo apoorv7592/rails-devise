@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  #protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
+  #before_action :authenticate_user! 
   before_filter :set_default_response_format
   helper_method :current_user
   helper_method :user_signed_in?
@@ -23,15 +24,16 @@ class ApplicationController < ActionController::Base
     def correct_user?
       @user = User.find(params[:id])
       unless current_user == @user
-        redirect_to root_url, :alert => "Access denied."
+        redirect_to login_path, :alert => "Access denied."
       end
     end
 
     def authenticate_user!
-      if !current_user
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+      unless user_signed_in?
+        redirect_to login_path,:alert => 'You need to sign in for access to this page.'
       end
     end
+
 
     def set_default_response_format
       if params[:source] == "mobile"

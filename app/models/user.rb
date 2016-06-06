@@ -14,12 +14,40 @@
 
 class User < ActiveRecord::Base
 
+  before_save :encrypt_password
+  after_save :clear_password
+
   has_many :addresses
   has_many :orders
   
-  #has_secure_password
+  attr_accessor :password
+
+  validates :email,  :presence => true, :uniqueness => true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  validates :password, :confirmation => true #password_confirmation attr
+  validates_length_of :password, :in => 6..20, :on => :create
+
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  
+  def self.authenticate(email, password)
+    user = User.find_by_email(email)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+      user
+    else
+      nil
+    end
+  end
+  
+  def encrypt_password
+    if password.present?
+      salt = BCrypt::Engine.generate_salt
+      self.password_salt = BCrypt::Engine.hash_secret(password, salt)
+    end
+  end
+  
+  def clear_password
+    self.password = nil
+  end
 
   def set_default_role
     if User.count == 0
@@ -29,14 +57,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
-      if auth['info']
-         user.name = auth['info']['name'] || ""
-      end
-    end
-  end
+  # def self.create_with_omniauth(auth)
+  #   create! do |user|
+  #     #user.provider = auth['provider']
+  #     user.id = auth['uid']
+  #     if auth['info']
+  #        user.name = auth['info']['name'] || ""
+  #     end
+  #   end
+  # end
 
 end

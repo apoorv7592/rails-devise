@@ -18,6 +18,8 @@
 #
 
 class OrdersController < ApplicationController
+
+  before_filter :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders

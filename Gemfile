@@ -62,15 +62,15 @@ end
 
 gem 'bootstrap-sass'
 gem 'high_voltage'
-gem 'omniauth'
-gem 'omniauth-twitter'
+
 gem 'pg'
 gem 'pundit'
 gem 'simple_form'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
-
+gem 'gcm'
+gem 'devise'
 
 group :development do
   gem 'better_errors'

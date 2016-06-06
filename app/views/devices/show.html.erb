@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @device.id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @device.user_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @device.token %>
+</p>
+
+<p>
+  <strong>Enabled:</strong>
+  <%= @device.enabled %>
+</p>
+
+<p>
+  <strong>Platform:</strong>
+  <%= @device.platform %>
+</p>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
