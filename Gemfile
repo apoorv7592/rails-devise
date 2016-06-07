@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem "paperclip"
 
 gem 'aws-sdk', '< 2.0'# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'annotate'
 
@@ -67,7 +67,6 @@ gem 'pg'
 gem 'pundit'
 gem 'simple_form'
 
-gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
 gem 'gcm'
 gem 'devise'
