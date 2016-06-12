@@ -2,8 +2,9 @@ require 'resque/server'
 Rails.application.routes.draw do
 
     get "logout" => "sessions#destroy", :as => "logout"
-    get "login" => "sessions#new", :as => "login"
-    get "sign_up" => "users#new", :as => "sign_up"
+    post "login" => "sessions#create", :as => "login"
+    get "sign_new" => "users#new", :as => "sign_new"
+    post "sign_up" => "users#create", :as => "sign_up"
     resources :users
     resources :sessions
 

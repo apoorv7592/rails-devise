@@ -17,14 +17,16 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_password
 
+
   has_many :addresses
   has_many :orders
+  has_many :devices
   
-  attr_accessor :password
+  attr_accessor :password, :isSocialLogin
 
   validates :email,  :presence => true, :uniqueness => true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
   validates :password, :confirmation => true #password_confirmation attr
-  validates_length_of :password, :in => 6..20, :on => :create
+  #validates_length_of :password, :in => 6..20, :on => :create
 
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -40,8 +42,8 @@ class User < ActiveRecord::Base
   
   def encrypt_password
     if password.present?
-      salt = BCrypt::Engine.generate_salt
-      self.password_salt = BCrypt::Engine.hash_secret(password, salt)
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
   

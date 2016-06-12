@@ -20,12 +20,13 @@ class SessionsController < ApplicationController
 
   def create
   user = User.authenticate(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
-      redirect_to root_url, :notice => "Logged in!"
-    else
-      flash.now.alert = "Invalid email or password"
-      render "new"
+    respond_to do |format|
+      if user 
+        session[:user_id] = user.id
+        format.json { render json: user, status: :ok }
+      else
+        format.json { render json: user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -41,21 +42,3 @@ class SessionsController < ApplicationController
 end
 
 
-def new
-end
-
-def create
-  user = User.authenticate(params[:email], params[:password])
-  if user
-    session[:user_id] = user.id
-    redirect_to root_url, :notice => "Logged in!"
-  else
-    flash.now.alert = "Invalid email or password"
-    render "new"
-  end
-end
-
-def destroy
-  session[:user_id] = nil
-  redirect_to root_url, :notice => "Logged out!"
-end
