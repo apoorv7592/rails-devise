@@ -79,7 +79,6 @@ class ProductsController < ApplicationController
   def update
     @product.product_categories = params[:product][:product_categories].reject(&:empty?)
     @product.sizes = params[:sizes]
-    @product.product_sizes.destroy_all
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }

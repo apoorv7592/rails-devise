@@ -28,24 +28,24 @@ class Product < ActiveRecord::Base
     attr_accessor :image, :sizes, :product_categories
     after_save :image_upload, :product_sizes_add, :product_categories_add
 
-  searchable do
-    text :name
+  # searchable do
+  #   text :name
 
-    text :description, :stored => true
-    integer :id, :stored => true
+  #   text :description, :stored => true
+  #   integer :id, :stored => true
 
-    string :url, :stored => true
-    integer :rank, :stored => true
+  #   string :url, :stored => true
+  #   integer :rank, :stored => true
     
-    text :product_sizes, :stored =>true do
-      product_sizes.enabled.map { |product_size| [product_size.id, product_size.size, product_size.qty_avail, product_size.mrp, product_size.price].join('|') }
-    end
+  #   text :product_sizes, :stored =>true do
+  #     product_sizes.enabled.map { |product_size| [product_size.id, product_size.size, product_size.qty_avail, product_size.mrp, product_size.price].join('|') }
+  #   end
     
 
-    text :images, :stored =>true do
-      images.map { |image| [image.image_file_name].join('|') }
-    end
-  end
+  #   text :images, :stored =>true do
+  #     images.map { |image| [image.image_file_name].join('|') }
+  #   end
+  # end
 
 
 	def image_upload
@@ -53,11 +53,13 @@ class Product < ActiveRecord::Base
 	end
 
   def product_sizes_add
+    self.product_sizes.destroy_all
     unit = sizes[0]["size_unit"]["unit"]
     sizes.map { |size| ProductSize.create(product_id:self.id,size:size["size"],size_unit:unit,qty_avail:size["qty_avail"],mrp:size["mrp"],price:size["price"],weight:size["weight"],status:size["status"]) }  if sizes.present?
   end
 
   def product_categories_add
+    self.categories.destroy_all
     product_categories.map { |pc| ProductCategory.create(product_id:self.id,category_id: pc) } if product_categories.present?
   end
 end
