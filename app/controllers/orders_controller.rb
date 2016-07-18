@@ -83,7 +83,6 @@ class OrdersController < ApplicationController
   end
 
   def cancelled
-    binding.pry
     @order = Order.find(params[:id])
     @order.status = "cancelled"
     respond_to do |format|
