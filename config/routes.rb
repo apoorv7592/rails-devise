@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
     resources :product_sizes
 
+    post 'orders/cancelled/:id' =>'orders#cancelled'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

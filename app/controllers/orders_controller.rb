@@ -19,7 +19,6 @@
 
 class OrdersController < ApplicationController
 
-  before_filter :authenticate_user!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -80,6 +79,21 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def cancelled
+    binding.pry
+    @order = Order.find(params[:id])
+    @order.status = "cancelled"
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to orders_path , notice: 'Order was successfully cancelled.' }
+        format.json { render :show, status: :ok, location: @order }
+      else
+        format.html { render :edit }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
     end
   end
 
