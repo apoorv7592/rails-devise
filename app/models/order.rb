@@ -95,16 +95,28 @@ class Order < ActiveRecord::Base
     end
 
     def set_discount
-      coupon = Coupon.where(code:coupon_code).first if Coupon.where(code:coupon_code).present?
-      if (self.amount >= coupon.qualifying_amount) and (coupon.expire_date > Date.today) and (coupon.start_date  < Date.today + 1.day)  and (coupon.status == "enabled")
-        @total_discount_value = coupon.value_type=="percentage" ? (coupon.value * amount * 0.01) : coupon.value
-        @discount_amount = @total_discount_value > coupon.max_discount ? coupon.max_discount : @total_discount_value
+      if Coupon.find_by(code:coupon_code).present?
+        coupon = Coupon.find_by(code:coupon_code)
+        if (self.amount >= coupon.qualifying_amount) and (coupon.expire_date > Date.today) and (coupon.start_date  < Date.today + 1.day)  and (coupon.status == "enabled")
+          @total_discount_value = coupon.value_type=="percentage" ? (coupon.value * amount * 0.01) : coupon.value
+          @discount_amount = @total_discount_value > coupon.max_discount ? coupon.max_discount : @total_discount_value
+        else
+          @discount_amount = 0
+        end
       else
         @discount_amount = 0
       end
       self.order_products.each do |order_product|
-         order_product.discount = (@discount == 0) ? 0 : (order_product.price * order_product.quantity * @discount_amount)/amount
+         order_product.discount = (@discount_amount == 0) ? 0 : (order_product.price * order_product.quantity * @discount_amount)/amount
          order_product.save
       end
+    end
+
+    def prescription_to_json
+     JSON.parse self.prescription.gsub('=>', ':')
+    end
+
+    def deliver_time_to_json
+      JSON.parse self.deliver_time.gsub('=>', ':')
     end
 end

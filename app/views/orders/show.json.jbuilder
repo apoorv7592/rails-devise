@@ -1,4 +1,4 @@
-json.extract! @order, :id, :address_id, :user_id, :cod_money, :shipping_money, :status, :is_confirm, :payment_gateway, :admin_user_id, :invoice_id, :note, :created_at, :updated_at, :amount, :discount_amount , :final_amount
+json.extract! @order, :id, :address_id, :user_id, :cod_money, :shipping_money, :status, :is_confirm, :payment_gateway, :admin_user_id, :invoice_id, :note, :created_at, :updated_at, :amount, :discount_amount , :final_amount, :prescription_to_json, :deliver_time_to_json
 
 json.address do |json|
   json.extract! @order.address, :id, :first_name, :last_name, :pincode, :landmark, :address, :mobile, :city, :state, :country if @order.address.present?
