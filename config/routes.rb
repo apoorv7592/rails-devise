@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   
   mount Resque::Server.new, :at => "/resque"
+    post 'orders/cancelled/:id' =>'orders#cancelled'
+    get 'addresses/get_user_address/:id' =>'addresses#get_user_address'
+    post 'coupons/check_coupon' => 'coupons/check_coupon'
   
     resources :homes
     resources :addresses
@@ -32,7 +35,6 @@ Rails.application.routes.draw do
 
     resources :product_sizes
 
-    post 'orders/cancelled/:id' =>'orders#cancelled'
 
 
 

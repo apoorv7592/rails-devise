@@ -45,7 +45,6 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(address_params)
-
     respond_to do |format|
       if @address.save
         format.html { redirect_to @address, notice: 'Address was successfully created.' }
@@ -80,6 +79,14 @@ class AddressesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def get_user_address
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.json { render json: @user.addresses }
+    end
+  end
+     
 
   private
     # Use callbacks to share common setup or constraints between actions.
