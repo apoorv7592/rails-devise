@@ -95,6 +95,37 @@ class CouponsController < ApplicationController
     end
   end
 
+  def check_coupon
+    @coupon = Coupon.find_by(code: params[:coupon_code])
+    if @coupon.present?
+      products = params[:products]
+      amount = 0
+      products.each do |product|
+        price = ProductSize.find(product[:product_size_id]).price
+        quantity = product[:quantity]
+        temp_amount = price * quantity
+        amount += temp_amount
+      end 
+      if (amount >= @coupon.qualifying_amount) and (@coupon.expire_date > Date.today) and (@coupon.start_date  < Date.today + 1.day)  and (@coupon.status == "enabled")
+        total_discount_value = @coupon.value_type=="percentage" ? (@coupon.value * amount * 0.01) : @coupon.value
+        discount_amount = total_discount_value > @coupon.max_discount ? @coupon.max_discount : total_discount_value
+      else
+        discount_amount = 0
+      end
+      @object = {}
+      @object[:total_amount] = amount
+      @object[:discount_amount] = discount_amount.to_i
+      @object[:amount_payable]  = amount - discount_amount
+      @object[:success_message]  = @coupon.success_message + " you will get #{discount_amount.to_i} off"
+      render json: @object
+    else
+      flash[:error] = 'Invalid Coupon'  
+      render json: flash
+    end
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_coupon
