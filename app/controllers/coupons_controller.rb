@@ -113,10 +113,10 @@ class CouponsController < ApplicationController
         discount_amount = 0
       end
       @object = {}
-      @object[:total_amount] = amount
+      @object[:total_amount] = amount.to_i
       @object[:discount_amount] = discount_amount.to_i
-      @object[:amount_payable]  = amount - discount_amount
-      @object[:success_message]  = @coupon.success_message + " you will get #{discount_amount.to_i} off"
+      @object[:amount_payable]  = (amount - discount_amount).to_i
+      @object[:success_message]  = @coupon.success_message + " you will get Rs. #{discount_amount.to_i} off"
       render json: @object
     else
       flash[:error] = 'Invalid Coupon'  
