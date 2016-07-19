@@ -73,7 +73,7 @@ class Order < ActiveRecord::Base
     end
 
     def amount
-      @amount = self.order_products.inject(0) {|total_amount,order_product| total_amount += (order_product.price * order_product.quantity)}
+      @amount = (self.order_products.inject(0) {|total_amount,order_product| total_amount += (order_product.price * order_product.quantity)}).to_i
     end
 
     def total_quantity
@@ -81,11 +81,11 @@ class Order < ActiveRecord::Base
     end
 
     def discount_amount
-      @discount_amount = self.order_products.inject(0) {|discount_amount,order_product| discount_amount += order_product.discount}
+      @discount_amount = (self.order_products.inject(0) {|discount_amount,order_product| discount_amount += order_product.discount}).to_i
     end
 
     def final_amount
-      @final_amount = amount - discount_amount
+      @final_amount = amount.to_i - discount_amount.to_i
     end
 
     def set_price
