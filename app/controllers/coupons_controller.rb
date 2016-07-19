@@ -115,7 +115,7 @@ class CouponsController < ApplicationController
       @object = {}
       @object[:total_amount] = amount.to_i
       @object[:discount_amount] = discount_amount.to_i
-      @object[:amount_payable]  = (amount - discount_amount).to_i
+      @object[:amount_payable]  = amount.to_i - discount_amount.to_i
       @object[:success_message]  = @coupon.success_message + " you will get Rs. #{discount_amount.to_i} off"
       render json: @object
     else
