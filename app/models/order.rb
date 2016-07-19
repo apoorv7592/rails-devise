@@ -113,10 +113,10 @@ class Order < ActiveRecord::Base
     end
 
     def prescription_to_json
-     JSON.parse self.prescription.gsub('=>', ':')
+     JSON.parse self.prescription.gsub('=>', ':') if self.prescription.present?
     end
 
     def deliver_time_to_json
-      JSON.parse self.deliver_time.gsub('=>', ':')
+      JSON.parse self.deliver_time.gsub('=>', ':')   if self.deliver_time.present?
     end
 end
