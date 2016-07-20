@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     end
 
     resources :product_sizes
+    resources :registrations, only: [:create , :update]
 
 
 
