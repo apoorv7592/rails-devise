@@ -1,35 +1,41 @@
 class OrderConfirmMailer < ApplicationMailer
 include Resque::Mailer
-  default from: "from@example.com"
+  default from: "contact@jmedss.com"
 
-  def order_placed(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Succesfully Placed')
+  def order_placed(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: "Order is succesfully placed, your Order ID is #{@order.id}")
   end
 
-  def order_confirm(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Confirmed')
+  def order_confirm(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: 'Order #{@order.id} is Confirmed')
   end
 
-  def order_packed(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Packed')
+  def order_packed(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: 'Order  #{@order.id} is Packed')
   end
 
-  def order_shipped(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Shipped')
+  def order_shipped(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: 'Order  #{@order.id} is Shipped')
   end
 
-  def order_delivered(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Delivered')
+  def order_delivered(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: 'Order #{@order.id} is Delivered')
   end
   
-  def order_cancelled(order)
-    @order = order
-    mail(to: @order.user.email, subject: 'Order is Cancelled')
+  def order_cancelled(order_id)
+    @order = Order.includes(:user, order_products: :product_size).find(order_id)
+    @email = @order.user.email
+    mail(to: @email, subject: 'Order  #{@order.id} is Cancelled')
   end
 
 end

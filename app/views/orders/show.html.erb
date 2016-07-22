@@ -1,27 +1,73 @@
+<style>
+table, td, th {
+    border: 1px solid black;
+    text-align:center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+  background: #66cccc;
+  color:white;
+}
+
+td{
+  background: rgba(1,0,0,0.1);
+}
+
+</style>
+
+
+<div style="padding:100px;font-size:15px;">
 <p id="notice"><%= notice %></p>
 
-<p>
+<div>
   <strong>Address:</strong>
-     <h6><b>Name :</b></h6><%= @order.address.first_name %>  <%= @order.address.last_name %> 
-     <h6><b>Pincode :</b></h6><%= @order.address.pincode %>  
-     <h6><b>Address :</b></h6><%= @order.address.landmark %> <%= @order.address.address %> 
-     <h6><b>Mobile :</b></h6><%= @order.address.mobile %> 
-     <h6><b>City :</b></h6><%= @order.address.city %> 
-     <h6><b>State :</b></h6><%= @order.address.state %> 
-     <h6><b>Country :</b></h6><%= @order.address.country %>
-</p>
 
-<p>
-  <strong>User:</strong>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Pincode</th>
+            <th>Address</th>
+            <th>Mobile</th>
+            <th>City</th>
+            <th>State</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+              <% if @order.address.present? %>
+              <td><%= @order.address.first_name %>  <%= @order.address.last_name %> </td>
+              <td><%= @order.address.pincode %> </td>
+              <td><%= @order.address.landmark %> <%= @order.address.address %> </td>
+              <td><%= @order.address.mobile %></td>
+              <td><%= @order.address.city %> </td>
+              <td><%= @order.address.state %> <%= @order.address.country %></td>
+              <% end %>
+            </tr>
+        </tbody>
+      </table>     
+</div>
+
+<br/><br/>
+<div>
+  <strong>User Info:</strong>
+  <% if @order.user.present? %>
   <%= @order.user.name %>
   <br/><%= @order.user.email %>
   <br/><%= @order.user.phone %>
-</p>
+  <% end %>
+</div>
+<br/><br/>
 
-
-<p>
+<div>
   <strong>Products:</strong>
-    <div class="col-md-12">
+    <div>
       <table>
         <thead>
           <tr>
@@ -36,22 +82,39 @@
             <tr>
               <td><%= product.product_size.product.name %></td>
               <td><%= product.product_size.size %> <%= product.product_size.size_unit %></td>
-              <td><%= product.quantity  %></td>
+              <td><%= product.quantity %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
+</div>
+<br/><br/>
+<p>
+  <strong>Total Quantity:</strong>
+  <%= @order.total_quantity %>
+</p>
+<p>
+  <strong>Order Amount</strong>
+  <%= @order.amount %>
+</p>
+<p>
+  <strong>Total Discount:</strong>
+  <%= @order.discount_amount %>
+</p>
+<p>
+  <strong>Final Amount(Net Payable):</strong>
+  <%= @order.final_amount %>
 </p>
 
 <p>
   <strong>Cod money:</strong>
-  <%= @order.cod_money %>
+  <%= @order.cod_money || 0 %>
 </p>
 
 <p>
   <strong>Shipping money:</strong>
-  <%= @order.shipping_money %>
+  <%= @order.shipping_money || 0 %>
 </p>
 
 <p>
@@ -69,15 +132,11 @@
   <%= @order.payment_gateway %>
 </p>
 
-<p>
-  <strong>Invoice:</strong>
-  <%= @order.invoice_id %>
-</p>
 
 <p>
   <strong>Note:</strong>
   <%= @order.note %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+</div>

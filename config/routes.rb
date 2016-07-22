@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   mount Resque::Server.new, :at => "/resque"
     post 'orders/cancelled/:id' =>'orders#cancelled'
     get 'addresses/get_user_address/:id' =>'addresses#get_user_address'
-    post 'coupons/check_coupon' => 'coupons/check_coupon'
-  
+    post 'coupons/check_coupon' => 'coupons#check_coupon'
+    get 'registrations/send_notification' =>'registrations#send_notification'
     resources :homes
     resources :addresses
     resources :invoices

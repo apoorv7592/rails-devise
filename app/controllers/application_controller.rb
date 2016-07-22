@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def authenticate_user!
-      unless user_signed_in?
-        redirect_to login_path,:alert => 'You need to sign in for access to this page.'
-      end
-    end
+    # def authenticate_user!
+    #   unless user_signed_in?
+    #     redirect_to login_path,:alert => 'You need to sign in for access to this page.'
+    #   end
+    # end
 
 
     def set_default_response_format

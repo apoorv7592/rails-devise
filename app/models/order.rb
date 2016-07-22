@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
     before_validation :set_price, on: :create
     after_create :set_discount
     after_save :order_confirm, if: lambda {|order| order.status == "order_placed" and order.is_confirm_changed? and order.is_confirm_was == "not confirm" and order.is_confirm == "confirm" }
-    after_save :order_placed, if: lambda {|order| order.status_changed? and order.status_was == nil and order.status == "order_placed" }
+    after_create :order_placed #, if: lambda {|order| order.status_changed? and  order.status == "order_placed" }
     after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "packed" }
     after_save :order_shipped, if: lambda {|order| order.status_changed? and order.status_was == "packed" and order.status == "shipped" }
     after_save :order_delivered, if: lambda {|order| order.status_changed? and order.status_was == "shipped" and order.status == "delivered" }
@@ -40,36 +40,36 @@ class Order < ActiveRecord::Base
 	enum is_confirm: ["not confirm", :confirm]
 
     def order_confirm
-      OrderConfirmMailer.order_confirm(self).deliver
+      OrderConfirmMailer.order_confirm(self.id).deliver
     end
 
     def order_placed
-      OrderConfirmMailer.order_placed(self).deliver
+      OrderConfirmMailer.order_placed(self.id).deliver
     end
 
     def order_packed
       packdate = OrderProcess.find_or_create_by(order_id: self.id)
       packdate.packing_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_packed(self).deliver
+      OrderConfirmMailer.order_packed(self.id).deliver
     end
     
     def order_shipped
       packdate = OrderProcess.find_by(order_id: self.id)
       packdate.shipping_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_shipped(self).deliver 
+      OrderConfirmMailer.order_shipped(self.id).deliver 
     end
 
     def order_delivered
       packdate = OrderProcess.find_by(order_id: self.id)
       packdate.delivered_date = Time.now        
       pckdate.save
-      OrderConfirmMailer.order_delivered(self).deliver
+      OrderConfirmMailer.order_delivered(self.id).deliver
     end    
 
     def order_cancelled
-      OrderConfirmMailer.order_cancelled(self).deliver
+      OrderConfirmMailer.order_cancelled(self.id).deliver
     end
 
     def amount

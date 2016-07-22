@@ -17,6 +17,11 @@ th{
 td{
   background: rgba(1,0,0,0.1);
 }
+
+tr.datarows td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 </style>
 
 <script>
@@ -35,8 +40,7 @@ td{
       <table>
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Total Quantity</th>
+            <th>Order Id</th>
             <th>Address</th>
             <th>User</th>
             <th>Status</th>
@@ -47,11 +51,10 @@ td{
 
         <tbody>
           <% @orders.each do |order| %>
-            <tr>
+            <tr class="datarows">
               <td><%= order.id %></td>
-              <td><%= order.total_quantity %></td>
-              <td><%= order.address.address%><br><%= order.address.landmark%><br>city: <%= order.address.city%><br>
-              mobile: <%= order.address.mobile%><br>pincode: <%= order.address.pincode%></td>
+              <td><% if order.address.present? %><%= order.address.address%><br><%= order.address.landmark%><br>city: <%= order.address.city%><br>
+              mobile: <%= order.address.mobile%><br>pincode: <%= order.address.pincode%><% end %></td>
               <td><%= order.user.name if order.user_id.present? %></td>
               <td><%= order.status %></td>
               <td><%= button_to order.is_confirm, order_path(order, order: {is_confirm: :confirm}), method: :put, data: { confirm: 'This Order will be confirmed' } %></td>
@@ -59,9 +62,11 @@ td{
               <td><%= link_to 'Edit', edit_order_path(order) %></td>
               <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
+            <tr></tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
+          <%= will_paginate @orders %>
 </div>
