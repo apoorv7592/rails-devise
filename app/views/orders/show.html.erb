@@ -138,5 +138,29 @@ td{
   <%= @order.note %>
 </p>
 
+<p>
+  <strong>Detail by User:</strong>
+  <%= @order.prescription_to_json["detail"] %>
+</p>
+
+<p>
+  <strong>Image by User:</strong>
+  <% if @order.prescription_to_json["images"].present? %>
+    <%= @order.prescription_to_json["images"].each do |user_image| %>
+      <%= image_tag user_image["url"] %>
+    <% end %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Delivery Start Time:</strong>
+  <%= @order.deliver_time_to_json["start_time"] %>
+</p>
+
+<p>
+  <strong>Delivery End Time:</strong>
+  <%= @order.deliver_time_to_json["end_time"] %>
+</p>
+
 <%= link_to 'Back', orders_path %>
 </div>
