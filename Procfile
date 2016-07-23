@@ -1,2 +1,2 @@
 web: bundle exec unicorn -p $PORT
-resque: env TERM_CHILD=1 bundle exec rake resque:work
+worker: env QUEUE=* bundle exec rake resque:work
