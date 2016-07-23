@@ -138,6 +138,7 @@ td{
   <%= @order.note %>
 </p>
 
+<% if @order.prescription_to_json.present? %>
 <p>
   <strong>Detail by User:</strong>
   <%= @order.prescription_to_json["detail"] %>
@@ -151,7 +152,9 @@ td{
     <% end %>
   <% end %>
 </p>
+<% end %>
 
+<% if @order.deliver_time_to_json.present? %>
 <p>
   <strong>Delivery Start Time:</strong>
   <%= @order.deliver_time_to_json["start_time"] %>
@@ -161,6 +164,8 @@ td{
   <strong>Delivery End Time:</strong>
   <%= @order.deliver_time_to_json["end_time"] %>
 </p>
+<% end %>
+
 
 <%= link_to 'Back', orders_path %>
 </div>
