@@ -55,7 +55,7 @@ tr.datarows td{
               <td><%= order.id %></td>
               <td><% if order.address.present? %><%= order.address.address%><br><%= order.address.landmark%><br>city: <%= order.address.city%><br>
               mobile: <%= order.address.mobile%><br>pincode: <%= order.address.pincode%><% end %></td>
-              <td><%= order.user.name if order.user_id.present? %></td>
+              <td><%= order.user.name if order.user.present? %></td>
               <td><%= order.status %></td>
               <td><%= button_to order.is_confirm, order_path(order, order: {is_confirm: :confirm}), method: :put, data: { confirm: 'This Order will be confirmed' } %></td>
               <td><%= link_to 'Show', order %></td>
