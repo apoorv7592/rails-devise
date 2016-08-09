@@ -1,10 +1,40 @@
-<p id="notice"><%= notice %></p>
-<h4><%= link_to "HOME", "/" %></h4>
-<h1>Listing Users</h1>
+<style>
+table, td, th {
+    border: 1px solid black;
+    text-align:center;
+}
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+  background: #66cccc;
+  color:white;
+}
+
+td{
+  background: rgba(1,0,0,0.1);
+}
+</style>
+
+<p id="notice"><%= notice %></p>
+<div  class="col-md-10 col-md-offset-1" style="width:1000px;">
+<h4><%= link_to "HOME", "/" %></h4>
+  <h1 style="text-align:center;"> Listing Users</h1>
+  </br>
+  <div class="row">
+    <div class="col-md-8">
+      <%= link_to 'New User', new_user_path, class: 'pull-right', class: 'btn btn-primary'%>
+    </div>
+  </div>
+  <div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
 <table>
   <thead>
     <tr>
+      <th>User Id</th>
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
@@ -15,6 +45,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
@@ -25,7 +56,9 @@
     <% end %>
   </tbody>
 </table>
+    </div>
+        <%= will_paginate @users %>
+  </div>
+</div>
 
-<br>
 
-<%= link_to 'New User', new_user_path %>

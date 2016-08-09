@@ -28,6 +28,7 @@ class Order < ActiveRecord::Base
     before_validation :set_price, on: :create
     after_create :set_discount
     after_save :order_confirm, if: lambda {|order| order.status == "order_placed" and order.is_confirm_changed? and order.is_confirm_was == "not confirm" and order.is_confirm == "confirm" }
+    after_save :order_onhold, if: lambda {|order| order.status == "order_placed" and order.is_confirm == "non confirm" and order.status_changed? and order.status_was == "order_placed" and order.status == "on_hold" }
     after_create :order_placed #, if: lambda {|order| order.status_changed? and  order.status == "order_placed" }
     after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "packed" }
     after_save :order_shipped, if: lambda {|order| order.status_changed? and order.status_was == "packed" and order.status == "shipped" }
@@ -35,7 +36,7 @@ class Order < ActiveRecord::Base
     after_save :order_cancelled, if: lambda {|order| order.status_changed? and order.status_was == "delivered" and order.status == "cancelled" }
     accepts_nested_attributes_for :order_products, allow_destroy: true
 
-	enum status: [:order_placed, :failed, :under_packing, :packed, :shipped, :cancelled, :rto, :delivered]
+	enum status: [:order_placed, :on_hold, :packed, :shipped, :cancelled, :rto, :delivered]
 	enum payment_gateway: [:cod, :prepaid]
 	enum is_confirm: ["not confirm", :confirm]
 
@@ -47,11 +48,15 @@ class Order < ActiveRecord::Base
       OrderConfirmMailer.order_placed(self.id).deliver
     end
 
+    def order_onhold
+      OrderConfirmMailer.order_onhold(self.id).deliver
+    end
+
     def order_packed
       packdate = OrderProcess.find_or_create_by(order_id: self.id)
       packdate.packing_date = Time.now        
       packdate.save
-      OrderConfirmMailer.order_packed(self.id).deliver
+      #OrderConfirmMailer.order_packed(self.id).deliver
     end
     
     def order_shipped
@@ -84,8 +89,16 @@ class Order < ActiveRecord::Base
       @discount_amount = (self.order_products.inject(0) {|discount_amount,order_product| discount_amount += order_product.discount}).to_i
     end
 
+    def amount_before_shipping
+      @amount_before_shipping = amount.to_i - discount_amount.to_i
+    end
+
+    def shipping_charge
+      @shipping_charge = (amount_before_shipping > 100) ? 0 : 40
+    end
+
     def final_amount
-      @final_amount = amount.to_i - discount_amount.to_i
+      @final_amount = amount.to_i - discount_amount.to_i + shipping_charge.to_i
     end
 
     def set_price
