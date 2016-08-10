@@ -27,8 +27,6 @@ class AddressesController < ApplicationController
     @addresses = Address.all
   end
 
-  # GET /addresses/1
-  # GET /addresses/1.json
   def show
   end
 
