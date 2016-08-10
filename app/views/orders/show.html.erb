@@ -122,10 +122,6 @@ td{
   <%= @order.status %>
 </p>
 
-<p>
-  <strong>Is confirm:</strong>
-  <%= @order.is_confirm %>
-</p>
 
 <p>
   <strong>Payment gateway:</strong>
@@ -165,7 +161,14 @@ td{
   <%= @order.deliver_time_to_json["end_time"] %>
 </p>
 <% end %>
+<%if @order.status=="order_placed" or  @order.status=="on_hold" %><%= button_to "Confirm Order", order_path(@order, order: {status: :on_hold}), method: :put, data: { confirm: 'This Order will be marked as on Hold' } %><%end%> <br/>
+<%if @order.status=="order_placed"%><%= button_to "Put on Hold", order_path(@order, order: {status: :on_hold}), method: :put, data: { confirm: 'This Order will be marked as on Hold' } %><%end%> <br/>
+<%if @order.status=="confirmed"%><%= button_to "Pack Order", order_path(@order, order: {status: :packed}), method: :put, data: { confirm: 'This Order will be marked as Packed' } %><%end%> <br/>
+<%if @order.status=="packed"%><%= button_to "Ship Order", order_path(@order, order: {status: :shipped}), method: :put, data: { confirm: 'This Order will be marked as shipped' } %><%end%> <br/>
+<%if @order.status=="shipped"%><%= button_to "Deliver Order", order_path(@order, order: {status: :delivered}), method: :put, data: { confirm: 'This Order will be marked as delivered' } %><%end%><br/>
+<%= button_to "Cancel Order", order_path(@order, order: {status: :cancelled}), method: :put, data: { confirm: 'This Order will be marked as cancelled' } %><br/>
 
 
-<%= link_to 'Back', orders_path %>
+
+<%= link_to 'Back', order_path %>
 </div>

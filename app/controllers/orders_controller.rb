@@ -104,8 +104,8 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      order_hash = params.require(:order).permit(:address_id, :user_id, :cod_money, :shipping_money, :is_confirm, :payment_gateway, :admin_user_id, :invoice_id, :note, :coupon_code, deliver_time: [:start_time, :end_time], prescription: [:detail, images:[:id, :url]])
-      order_hash.merge! params.require(:order).permit(:status) if params["order"]["status"] == "cancelled"
+      order_hash = params.require(:order).permit(:address_id, :user_id, :cod_money, :shipping_money, :payment_gateway, :admin_user_id, :invoice_id, :note, :coupon_code, deliver_time: [:start_time, :end_time], prescription: [:detail, images:[:id, :url]])
+      order_hash.merge! params.require(:order).permit(:status) #if params["order"]["status"] == "cancelled" ||  params["order"]["status"] == "on_hold"
       if params.require(:order)[:order_products_attributes].present?
         order_hash[:order_products_attributes]=[]
         params.require(:order).require(:order_products_attributes).map { |order_product| order_hash[:order_products_attributes]<< order_product.permit(:product_size_id, :quantity, :price) }

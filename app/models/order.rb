@@ -27,18 +27,17 @@ class Order < ActiveRecord::Base
     attr_accessor :coupon_code
     before_validation :set_price, on: :create
     after_create :set_discount
-    after_save :order_confirm, if: lambda {|order| order.status == "order_placed" and order.is_confirm_changed? and order.is_confirm_was == "not confirm" and order.is_confirm == "confirm" }
-    after_save :order_onhold, if: lambda {|order| order.status == "order_placed" and order.is_confirm == "non confirm" and order.status_changed? and order.status_was == "order_placed" and order.status == "on_hold" }
+    after_save :order_confirm, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "confirmed" }
+    after_save :order_onhold, if: lambda {|order| order.status_changed? and order.status == "on_hold" }
     after_create :order_placed #, if: lambda {|order| order.status_changed? and  order.status == "order_placed" }
-    after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "packed" }
+    after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "confirmed" and order.status == "packed" }
     after_save :order_shipped, if: lambda {|order| order.status_changed? and order.status_was == "packed" and order.status == "shipped" }
     after_save :order_delivered, if: lambda {|order| order.status_changed? and order.status_was == "shipped" and order.status == "delivered" }
-    after_save :order_cancelled, if: lambda {|order| order.status_changed? and order.status_was == "delivered" and order.status == "cancelled" }
+    after_save :order_cancelled, if: lambda {|order| order.status_changed? and order.status == "cancelled" }
     accepts_nested_attributes_for :order_products, allow_destroy: true
 
-	enum status: [:order_placed, :on_hold, :packed, :shipped, :cancelled, :rto, :delivered]
+	enum status: [:order_placed, :confirmed, :on_hold, :packed, :shipped, :cancelled, :rto, :delivered]
 	enum payment_gateway: [:cod, :prepaid]
-	enum is_confirm: ["not confirm", :confirm]
 
     def order_confirm
       OrderConfirmMailer.order_confirm(self.id).deliver
@@ -69,7 +68,7 @@ class Order < ActiveRecord::Base
     def order_delivered
       packdate = OrderProcess.find_by(order_id: self.id)
       packdate.delivered_date = Time.now        
-      pckdate.save
+      packdate.save
       OrderConfirmMailer.order_delivered(self.id).deliver
     end    
 

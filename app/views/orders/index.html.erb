@@ -24,12 +24,6 @@ tr.datarows td{
 }
 </style>
 
-<script>
- $(function(){
- $(".chosen-select").chosen({width: "200px"});
- });
- </script>
-
 <p id="notice"><%= notice %></p>
 <div  class="col-md-10 col-md-offset-1" style="width:1000px;">
 <h4><%= link_to "HOME", "/" %></h4>
@@ -41,10 +35,10 @@ tr.datarows td{
         <thead>
           <tr>
             <th>Order Id</th>
-            <th>Address</th>
-            <th>User</th>
+            <th>Delivery Address</th>
+            <th>User Informarion</th>
             <th>Status</th>
-            <th>Is confirm</th>
+            <th>Confirm</th>
             <th colspan="3">Action</th>
           </tr>       
         </thead>
@@ -55,9 +49,11 @@ tr.datarows td{
               <td><%= order.id %></td>
               <td><% if order.address.present? %><%= order.address.address%><br><%= order.address.landmark%><br>city: <%= order.address.city%><br>
               mobile: <%= order.address.mobile%><br>pincode: <%= order.address.pincode%><% end %></td>
-              <td><%= order.user.name if order.user.present? %></td>
+              <td><% if order.user.present? %><%= order.user.name %><br>email: <%= order.user.email%><br>phone: <%= order.user.phone%><%end%></td>
               <td><%= order.status %></td>
-              <td><%= button_to order.is_confirm, order_path(order, order: {is_confirm: :confirm}), method: :put, data: { confirm: 'This Order will be confirmed' } %></td>
+              <td> <% if order.status=="order_placed" or order.status=="on_hold"%><%= button_to "Confirm Order", order_path(order, order: {status: :confirmed}), method: :put, data: { confirm: 'This Order will be confirmed' } %><%end%> <br/>
+                 <% if order.status=="order_placed"%><%= button_to "Put On Hold", order_path(order, order: {status: :on_hold}), method: :put, data: { confirm: 'This Order will be put on hold' } %><% end %><br/>
+              </td>
               <td><%= link_to 'Show', order %></td>
               <td><%= link_to 'Edit', edit_order_path(order) %></td>
               <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
