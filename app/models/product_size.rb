@@ -23,11 +23,5 @@ class ProductSize < ActiveRecord::Base
 
 	validates_presence_of :size, :product_id, :message => "can't be empty"
 
-
-	def product_amount
-
-
-
-	end
 end
  

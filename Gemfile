@@ -43,7 +43,9 @@ gem 'progress_bar'
 
 gem 'resque'
 gem 'resque_mailer'
-
+gem 'aws-ses', '~> 0.4.4', require: 'aws/ses'
+gem 'firebase'
+gem 'fcm'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
