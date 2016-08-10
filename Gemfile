@@ -72,11 +72,21 @@ gem 'gcm'
 gem 'devise'
 
 group :development do
+  gem 'better_errors'
+  gem 'foreman'
+  gem 'quiet_assets'
+  gem 'rails_apps_pages'
+  gem 'rails_apps_testing'
   gem 'rails_layout'
+  gem 'spring-commands-rspec'
+  gem 'sqlite3'
 end
 
 group :development, :test do
+  gem 'faker'
   gem 'pry-rescue'
+  gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :production do
@@ -85,5 +95,9 @@ group :production do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
