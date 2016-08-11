@@ -1,60 +1,45 @@
-<style>
-table, td, th {
-    border: 1px solid black;
-    text-align:center;
-}
-
-table {
-    width: 500px;
-    border-collapse: collapse;
-}
-
-th{
-  background: rgba(1,0,0,0.1);
-}
-</style>
 <html>
 <div>
-<p>Hi @order.user.name,</p>
+<p>Hi <%= @order.user.name%>,</p>
 <p>Thank you for ordering with us!</br>
-This is a confirmation of the order @order.id that you placed. Thanks a lot for that. We're hereby sharing your order details to make it easy for you to remember what you ordered.</p> 
+This is a confirmation of the order <%= @order.id%> that you placed. Thanks a lot for that. We're hereby sharing your order details to make it easy for you to remember what you ordered.</p> 
 
 <h5> Product Details: </h5>
   <div class="row" style="margin-top:30px;">
     <div class="col-md-12">
-      <table>
+      <table style="border: 1px solid black;text-align:center;width: 500px;border-collapse: collapse;">
         <thead>
           <tr>
-            <th>Product name</th>
-            <th>Size</th>
-            <th>Quantity</th>
-            <th>Final Price</th>
+            <th style="border: 1px solid black;text-align:center;background: rgba(1,0,0,0.1);">Product name</th>
+            <th style="border: 1px solid black;text-align:center;background: rgba(1,0,0,0.1);">Size</th>
+            <th style="border: 1px solid black;text-align:center;background: rgba(1,0,0,0.1);">Quantity</th>
+            <th style="border: 1px solid black;text-align:center;background: rgba(1,0,0,0.1);">Final Price</th>
           </tr>
         </thead>
         <tbody>
           <% @order.order_products.each do |odp| %>
             <tr>
-              <td><%= odp.product_size.product.name %></td>
-              <td><%= odp.product_size.size %></td>
-              <td><%= odp.quantity %></td>
-              <td><%= odp.price %></td>
+              <td style="border: 1px solid black;text-align:center;"><%= odp.product_size.product.name %></td>
+              <td style="border: 1px solid black;text-align:center;"><%= odp.product_size.size %></td>
+              <td style="border: 1px solid black;text-align:center;"><%= odp.quantity %></td>
+              <td style="border: 1px solid black;text-align:center;"><%= odp.price %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
-<h5> Amount :  @order.amount    </h5>
-<h5> Discount : @order.discount_amount   </h5>
-<h5> Shipping Charge : @order.shipping_charge   </h5>
-<h5> Final Amount : @order.final_amount</h5>
+<h5> Amount :  <%= @order.amount %>   </h5>
+<h5> Discount : <%= @order.discount_amount %>   </h5>
+<h5> Shipping Charge : <%= @order.shipping_charge %></h5>
+<h5> Final Amount : <%=@order.final_amount %></h5>
 <p><b>Recipient Details:</b><br/>
-@order.address.first_name<br/> 
-@order.address.address, <br/>
-@order.address.landmark,<br/>
-@order.address.city, @order.address.state, India <br/>
-Pincode: @order.address.pincode<br/>
-Mob: @order.address.mobile
+ <%=@order.address.first_name %><br/> 
+ <%=@order.address.address %>, <br/>
+ <%=@order.address.landmark %>,<br/>
+ <%=@order.address.city %>, <%=@order.address.state %>, India <br/>
+Pincode:  <%=@order.address.pincode%><br/>
+Mob:  <%=@order.address.mobile%>
 </p>
 
 <p>Feel Better,<br/>

@@ -1,5 +1,15 @@
 <html>
+<div>
+	<p>Hi  <%= @order.user.name%>,</p>
+    <p>Thanks for using J-Medss. Your order no <%= @order.id %> has been dispatched. It will be delivered to you shortly.
+    </p>
 
-<div> order <%= @order.id %> is shipped </div>
+	<h5> Amount :  <%= @order.amount %>   </h5>
+	<h5> Discount : <%= @order.discount_amount %>   </h5>
+	<h5> Shipping Charge : <%= @order.shipping_charge %></h5>
+	<h5> Final Amount : <%=@order.final_amount %></h5>
 
+	<p>Feel Better,<br/>
+	Team J-Medss</p>
+</div>
 </html>

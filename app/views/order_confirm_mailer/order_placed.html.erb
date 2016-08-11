@@ -1,10 +1,10 @@
 <html>
 <div>
-	<p>Hi @order.user.name,</p>
+	<p>Hi  <%= @order.user.name%>,</p>
 	<p>We have received your order. Now sit back and let us serve you. You will receive a call from our Partner Pharmacist, in order to confirm your order.
 	</p>
-	<p> Your Order ID : @order.id <br/>
-	Order Placed on: @order.created_at</p>
+	<p> Your Order ID : <%= @order.id%> <br/>
+	Order Placed on: <%= @order.created_at%> </p>
 	<p>Feel Better,<br/>
 	Team J-Medss</p>
 </div>
