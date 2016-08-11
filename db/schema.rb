@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602165700) do
+ActiveRecord::Schema.define(version: 20160720044745) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
@@ -138,6 +138,18 @@ ActiveRecord::Schema.define(version: 20160602165700) do
   add_index "invoices", ["invoice_date"], name: "index_invoices_on_invoice_date"
   add_index "invoices", ["order_id"], name: "index_invoices_on_order_id"
 
+  create_table "order_deductions", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "coupon_id"
+    t.float    "total_amount"
+    t.float    "total_discount"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "order_deductions", ["coupon_id"], name: "index_order_deductions_on_coupon_id"
+  add_index "order_deductions", ["order_id"], name: "index_order_deductions_on_order_id"
+
   create_table "order_processes", force: :cascade do |t|
     t.integer  "order_id"
     t.string   "barcode",        limit: 50
@@ -184,6 +196,8 @@ ActiveRecord::Schema.define(version: 20160602165700) do
     t.text     "note"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.text     "deliver_time"
+    t.text     "prescription"
   end
 
   add_index "orders", ["is_confirm"], name: "index_orders_on_is_confirm"
@@ -229,6 +243,14 @@ ActiveRecord::Schema.define(version: 20160602165700) do
   end
 
   add_index "products", ["status"], name: "index_products_on_status"
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "registration_id"
+    t.string   "device_name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
