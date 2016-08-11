@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
     attr_accessor :coupon_code
     before_validation :set_price, on: :create
     after_create :set_discount
-    after_save :order_confirm, if: lambda {|order| order.status_changed? and order.status_was == "order_placed" and order.status == "confirmed" }
+    after_save :order_confirm, if: lambda {|order| order.status_changed? and (order.status_was == "order_placed" || order.status_was == "on_hold") and order.status == "confirmed" }
     after_save :order_onhold, if: lambda {|order| order.status_changed? and order.status == "on_hold" }
     after_create :order_placed #, if: lambda {|order| order.status_changed? and  order.status == "order_placed" }
     after_save :order_packed, if: lambda {|order| order.status_changed? and order.status_was == "confirmed" and order.status == "packed" }
