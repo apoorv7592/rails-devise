@@ -41,7 +41,8 @@ gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
 
-gem 'resque', "~> 1.22.0"
+gem 'resque'
+gem 'resque-web', require: 'resque_web'
 gem 'resque_mailer'
 
 # Use Capistrano for deployment
